@@ -63,6 +63,9 @@
 		<!-- helper_functions.lua: Generic helper functions for the extension -->
 		<script name="Helper" file="scripts/helper_functions.lua" />
 
+		<!-- Override some base functions -->
+		<script name="CombatManagerCustom" file="scripts/manager_combat_custom.lua" />
+
 		<!-- combat_manager.lua: From CoreRPG combat_manager.lua, modified for option to skip non-initiatived actors in CT -->
 		<!-- <script name="CombatManager" file="scripts/manager_combat.lua" /> -->
 

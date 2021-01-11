@@ -160,17 +160,17 @@ function addSaveWidget(ctNode, sSuccess)
 	-- start by deleting any other instances of a save bitmap widget on token before adding a new one if any
 	local saveWidget = tokenCT.findWidget("save");
 
-	if saveWidget then
-		saveWidget.destroy();
-	end
+	-- if saveWidget then
+	-- 	saveWidget.destroy();
+	-- end
 
-    -- add new bitmap save widget
-    saveWidget = tokenCT.addBitmapWidget(saveIconName);
-    saveWidget.setName("save");
-    saveWidget.setPosition("center");
-    saveWidget.bringToFront();
-    Helper.resizeForTokenSize(tokenCT, saveWidget, 1);
-    saveWidget.setVisible(true);
+  -- add new bitmap save widget
+  saveWidget = tokenCT.addBitmapWidget(saveIconName);
+  saveWidget.setName("save");
+  saveWidget.setPosition("center");
+  saveWidget.bringToFront();
+  Helper.resizeForTokenSize(tokenCT, saveWidget, 1);
+  saveWidget.setVisible(true);
 end
 
 
