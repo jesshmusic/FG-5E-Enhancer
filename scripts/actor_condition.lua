@@ -39,10 +39,8 @@ function updateHealthCondition(tokenCT, nPercentWounded, sStatus)
         end
     elseif (sStatus == 'Dying' or sStatus == 'Dying (1)' or sStatus == 'Dying (2)') then
         if ( OptionsManager.getOption('CE_SC') == "option_skull" ) or ( OptionsManager.getOption('CE_SC') == "option_cross" ) then
-
             local ctNode = CombatManager.getCTFromToken(tokenCT);
             local sClass, sRecord = DB.getValue(ctNode, "link", "", "");
-            Debug.chat('db entries', sClass, sRecord);
             if (sClass == 'charsheet') then
               widgetActorCondition = tokenCT.addBitmapWidget("health_dying");
             elseif ( OptionsManager.getOption('CE_SC') == "option_skull" ) then

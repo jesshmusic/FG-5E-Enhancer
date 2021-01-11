@@ -13,14 +13,14 @@ end
 
 function dbWatcher(node)
 	local sSave = node.getValue();
-	local ctNode = DB.getParent(node);	
+	local ctNode = DB.getParent(node);
     addSaveWidget(ctNode, sSave);
 end
 
 function applySave(rSource, rOrigin, rAction, sUser)
 	local msgShort = {font = "msgfont"};
 	local msgLong = {font = "msgfont"};
-	
+
 	msgShort.text = "Save";
 	msgLong.text = "Save [" .. rAction.nTotal ..  "]";
 	if rAction.nTarget > 0 then
@@ -36,9 +36,9 @@ function applySave(rSource, rOrigin, rAction, sUser)
 		msgShort.text = msgShort.text .. " [vs " .. ActorManager.getDisplayName(rOrigin) .. "]";
 		msgLong.text = msgLong.text .. " [vs " .. ActorManager.getDisplayName(rOrigin) .. "]";
 	end
-	
+
 	msgShort.icon = "roll_cast";
-		
+
 	local sAttack = "";
 	local bHalfMatch = false;
 	if rAction.sSaveDesc then
@@ -46,11 +46,11 @@ function applySave(rSource, rOrigin, rAction, sUser)
 		bHalfMatch = (rAction.sSaveDesc:match("%[HALF ON SAVE%]") ~= nil);
 	end
 	rAction.sResult = "";
-	
+
 	if rAction.nTarget > 0 then
 		if rAction.nTotal >= rAction.nTarget then
 			msgLong.text = msgLong.text .. " [SUCCESS]";
-			
+
 			if rSource then
 				local bHalfDamage = bHalfMatch;
 				local bAvoidDamage = false;
@@ -69,7 +69,7 @@ function applySave(rSource, rOrigin, rAction, sUser)
 						end
 					end
 				end
-				
+
 				if bAvoidDamage then
 					rAction.sResult = "none";
 					rAction.bRemoveOnMiss = false;
@@ -77,7 +77,7 @@ function applySave(rSource, rOrigin, rAction, sUser)
 					rAction.sResult = "half_success";
 					rAction.bRemoveOnMiss = false;
 				end
-				
+
 				if rOrigin and rAction.bRemoveOnMiss then
 					TargetingManager.removeTarget(ActorManager.getCTNodeName(rOrigin), ActorManager.getCTNodeName(rSource));
 				end
@@ -102,20 +102,20 @@ function applySave(rSource, rOrigin, rAction, sUser)
 						end
 					end
 				end
-				
+
 				if bHalfDamage then
 					rAction.sResult = "half_failure";
 				end
 			end
 		end
 	end
-	
+
 	ActionsManager.outputResult(rAction.bSecret, rSource, rOrigin, msgLong, msgShort);
-	
+
 	if rSource and rOrigin then
 		ActionDamage.setDamageState(rOrigin, rSource, StringManager.trim(sAttack), rAction.sResult);
-    end
-    
+  end
+
 	-- Override section: Draw save result bitmap widget on top of token
 	if OptionsManager.getOption("CE_STG") == "on" then
 		checkSave(rSource, rAction);
@@ -124,23 +124,23 @@ end
 
 
 -- Check save results, call for bitmap widget draw
-function checkSave(rSource, rAction)		
+function checkSave(rSource, rAction)
 		-- Create DB entry for save
 		local ctNodePath = rSource.sCTNode;
-		local ctNode = DB.findNode(ctNodePath);		
-		local dbNode = DB.getChild(ctNode, "savingthrowresult");		
+		local ctNode = DB.findNode(ctNodePath);
+		local dbNode = DB.getChild(ctNode, "savingthrowresult");
 
 		if (dbNode == nil) then
 			dbNode = ctNode.createChild("savingthrowresult", "string");
 		end
 
 		if rAction.nTotal >= rAction.nTarget then
-			-- success		
+			-- success
 			dbNode.setValue('SUCCESS');
 		else
-			-- failure		
+			-- failure
 			dbNode.setValue('FAILURE');
-		end	
+		end
 end
 
 
@@ -150,7 +150,7 @@ function addSaveWidget(ctNode, sSuccess)
 	local tokenCT = CombatManager.getTokenFromCT(ctNode);
 
 	local saveIconName = '';
-	
+
 	if sSuccess == 'SUCCESS' then
 		saveIconName = 'save_success_d20';
 	else
@@ -159,14 +159,14 @@ function addSaveWidget(ctNode, sSuccess)
 
 	-- start by deleting any other instances of a save bitmap widget on token before adding a new one if any
 	local saveWidget = tokenCT.findWidget("save");
-								
+
 	if saveWidget then
 		saveWidget.destroy();
-	end     
+	end
 
     -- add new bitmap save widget
     saveWidget = tokenCT.addBitmapWidget(saveIconName);
-    saveWidget.setName("save");	
+    saveWidget.setName("save");
     saveWidget.setPosition("center");
     saveWidget.bringToFront();
     Helper.resizeForTokenSize(tokenCT, saveWidget, 1);
@@ -181,28 +181,28 @@ function deleteSaveWidgets(sCommand, sParams)
 	local aEntries = CombatManager.getSortedCombatantList();
 
 	-- iterate through whole CT
-    if #aEntries > 0 then                      
+    if #aEntries > 0 then
         local nIndexActive = 0;
-        for i = nIndexActive + 1, #aEntries do                   
-			local node = aEntries[i];                  
-			
+        for i = nIndexActive + 1, #aEntries do
+			local node = aEntries[i];
+
 			-- delete if db entry
 			local dbSaveEntry = DB.getChild(node, "savingthrowresult");
-			if dbSaveEntry then 
+			if dbSaveEntry then
 				DB.deleteNode(dbSaveEntry);
 			end
 
-            local token = CombatManager.getTokenFromCT(node);			
+            local token = CombatManager.getTokenFromCT(node);
             if token ~= nil then
 				-- delete individual save bitmap widget if found for that token
-				local aWidgets = TokenManager.getWidgetList(token, "");				
+				local aWidgets = TokenManager.getWidgetList(token, "");
 				local widgetSaves = token.findWidget("save");
-								
+
 				if widgetSaves then
 					widgetSaves.destroy();
-				end       
+				end
 			end
-			
+
             nIndexActive = nIndexActive + 1;
         end
 	end
