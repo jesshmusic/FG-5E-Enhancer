@@ -2,17 +2,17 @@
     Script to handle the DM pinging the map. Doing so adds a ping token and moves the players maps to center on that location.
 ]]--
 
-function onInit()		
-	-- Token.onClickDown = onClickDown;	
+function onInit()
+	-- Token.onClickDown = onClickDown;
 end
 
-function onClickDown( token, button, image ) 
+function onClickDown( token, button, image )
 	-- Deletes token from combat map, if Alt held on left mouse click.
 	if (Input.isControlPressed() == true) and (User.isHost() == true) and (button==1) then
-        
+
         --local nodeCT = CombatManager.getCTFromToken(token);
-        --token.delete();		
-        
+        --token.delete();
+
 		Debug.chat('image ', image)
 		--[[
 		imagecontrol
@@ -22,5 +22,5 @@ function onClickDown( token, button, image )
 		Input.getMousePosition()  return: x, y
 		]]--
 
-	end	
+	end
 end

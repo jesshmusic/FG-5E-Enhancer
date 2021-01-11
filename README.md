@@ -14,12 +14,12 @@ I am not able to put extra work into making sure it is compatible with other ext
 
 ### Prerequisites
 
-You need to have a copy of Fantasy Grounds Unity installed on your computer. 
+You need to have a copy of Fantasy Grounds Unity installed on your computer.
 https://www.fantasygrounds.com/home/home.php
 
 
 ### Installing
-    
+
 GitHub link: https://github.com/StyrmirThorarins/FG-5E-Enhancer
 
 1) Open the folder "Extension files (complete extension)" to download the latest version of the complete extension.
@@ -33,7 +33,7 @@ Or one of the its sub-extensions from here "Extension files (sub-extensions)" fo
 
 ## Built With
 
-* [LUA](https://www.lua.org/) - Lua is a powerful, efficient, lightweight, embeddable scripting language. It supports procedural programming, object-oriented programming, functional programming, data-driven programming, and data description. 
+* [LUA](https://www.lua.org/) - Lua is a powerful, efficient, lightweight, embeddable scripting language. It supports procedural programming, object-oriented programming, functional programming, data-driven programming, and data description.
 * [XML](https://www.w3.org/TR/REC-xml/) - Extensible Markup Language (XML) 1.0 (Fifth Edition)
 * [FG API](https://www.fantasygrounds.com/refdoc/) - Fantasy Grounds API as created by SmiteWorks.
 
@@ -65,7 +65,7 @@ This license overrides any licences written or supplied with any sub-extensions 
 - Blood pools on death: Draw blood pools underneath tokens on death.
 - Horizontal health bars: Enable horizontal health bars over tokens. 5 options available: Off | Left aligned, default height | Left aligned, taller | Centered, default height | Centered, taller.
 - Larger health dots: Enable larger health dots for tokens. 3 options available: FGU Default size | Larger | Largest.
-- Lock token rotation to Alt + Mouse Wheel: With this enabled the tokens only rotate if you're holding down the alt button while scrolling the mouse wheel over them. 
+- Lock token rotation to Alt + Mouse Wheel: With this enabled the tokens only rotate if you're holding down the alt button while scrolling the mouse wheel over them.
 - Range rules to use: Select how to calculate ranges for automatic range modifiers. Standard, the default recommended. Actual pixel distance between the edges of the boxes surrounding the tokens divided by 5 for the width of the hexes you've set. RAW, rules as written, not tested fully.
 Ranged in melee modifier (for medium sizes and smaller only): When enabled it adds a disadvantage for ranged attacks while there is an active enemy in melee range, if the attacker does not have the crossbow feat.
 - Saving throw graphics: Adds saving grapical indicators for if a target succeeds of fails a saving throw. (use '/dsave' in the chat to delete these markers afterwards)
@@ -87,7 +87,7 @@ Ranged in melee modifier (for medium sizes and smaller only): When enabled it ad
 - /dsave : delete save graphics from all tokens
 
 ## Features, Combat
-- Delete tokens from map and CT with single mouse click. 
+- Delete tokens from map and CT with single mouse click.
     Alt + left mouse-click on token on map, deletes the token from the map.
     Alt + Ctrl + left mouse-click on token on map, deletes the token from the map and from the CT.
 - Add height widget to a token (DM only).
@@ -98,9 +98,9 @@ Ranged in melee modifier (for medium sizes and smaller only): When enabled it ad
 - 'Reach underlay' and 'Faction/space underlay' made as toggle switches in the menu items. Re-add tokens to update.
 - Active actor on CT token underlay made as toggle switches in the menu items. Clears all other underlays than the current actor.
 - When an effect is dropped on a target in the CT or on a CT linked token on the map. If that target already has that effect, then it is removed from the target instead.    
-- Changeable opacity underlay for active actor. Controllable by menu item. 
+- Changeable opacity underlay for active actor. Controllable by menu item.
 - Size of active actor underlay either full or half reach. Controllable by menu item.
-- Blood splatters on token when taking damage. Controllable by menu item. 
+- Blood splatters on token when taking damage. Controllable by menu item.
 - Blood pools on tokens on death. Controllable by menu item.
 - Add X or skull or no graphics onto token on death. Controllable by menu item.
 
@@ -132,14 +132,14 @@ Alpha version of 5E Enhancer. Not for general use, a number of features added an
 -- Seperating and decoupling of code from SmiteWorks code base (5E ruleset and CoreRPG ruleset) whenever possible, for easier maintenance and clearer code, and future update proofing against ruleset updates.
 -- General code cleanup.
 
-v0.2.0 (October 15th, 2019) 
+v0.2.0 (October 15th, 2019)
 - Added 'manager_token.lua' from CoreRPG ruleset.
 - 'Reach underlay' and 'Faction/space underlay' made as toggle switches in the menu items. (scripts/manager_token.lua: updateSizeHelper)
 - Rewriting of horizontal health bars code, seamlessly integrated to run from manager_token.lua with minimal extra code in that ruleset file. Horizontal health bars now work flawlessly. (scripts/health_graphics.lua: drawHorizontalHealthBar, updateHealthBarScale | scripts/manager_token.lua: updateHealthHelper)
 - Added menu option to toggle for default or larger health dots.
 - Added larger health dots. (scripts/health_graphics.lua: drawLargerHealthDot | scripts/manager_token.lua: updateHealthHelper)
 
-v0.3.1 (October 15th, 2019) 
+v0.3.1 (October 15th, 2019)
 - Fixed horizontal health bar scaling on token resize. (scripts/manager_token.lua: onScaleChanged)
 - Added menu option to display and underlay under tokens on the map that are active in the combat tracker. Clears all other underlays than the current actor. (scrips/token_highlighter.lua | manager_token.lua: updateActiveHelper)
 
@@ -176,7 +176,7 @@ v0.6.0 (January 4th, 2020)
 - When an effect is dropped on a target in the CT or on a CT linked token on the map. If that target already has that effect, then it is removed from the target instead. (scripts/token_effects_handler.lua, scripts/helper_functions.lua)
 
 v0.7.0 (January 23rd, 2020)
-- Blood splatters on token when taking damage. Controllable by menu item. 
+- Blood splatters on token when taking damage. Controllable by menu item.
 - Add X or skull or no graphics widget on token death. Controllable by menu item.
 - Blood pools on tokens on death. Controllable by menu item.
 - Minimized horizontal health bar to 0% health, would go into the negative direction as a grey bar.
@@ -201,7 +201,7 @@ v0.9.0 (April 14th, 2020)
 - Added menu option to skip actors in CT that haven't rolled initiative.
 - Added menu switch to select ruleset to use for automatic range calculations. Standard | Variant (placeholder only) | RAW (Rules as Written)
 - Prepared spell buttons for NPC's were off frame in CT. Fixed.
-- Max range for weapons not read for automatic range attack modifiers. Fixed. 
+- Max range for weapons not read for automatic range attack modifiers. Fixed.
 
 V0.9.1 (April 20th, 2020)
 - Added rescaling of token when Ctrl + Scroll wheel over token. Note: After rescaling drop token on map again to redraw all widgets to scale.
@@ -245,7 +245,11 @@ v0.10.3 (- Jun, 2020)
 - Added graphical widget for PC's dying. Shows up if either skull or cross widgets have been selected in the menu items on actor death.
 - Update range number by drawn range arrow with extension calculated ranges (including for height).
 
-
+v0.11.1 (11th January, 20201)
+- Fix: Save token not always appearing.
+- Enhancement: Save token disappears at the start of the Token character's turn.
+- Fix: Removed a conflict with 5E Spell Automation.
+- Fix: the death token was not working for NPCs.
 
 Ideas for future versions.
 - Add map pinging, Ctrl + L-Click on map.
