@@ -5,162 +5,162 @@
 	<properties>
 		<name>5E Enhancer v0.11.0</name>
 		<version>0.11.0</version>
-		
+
 		<author>Styrmir T.</author>
 		<description>5E Enhancer</description>
-		
+
 		<ruleset>
 			<name>5E</name>
-		</ruleset>			
+		</ruleset>
 
 		<loadorder>50</loadorder>
-	</properties>    	
+	</properties>
 
-	<base>		
-		<!-- Presented in alphabetic order of the .lua file in the /scripts folder -->		
+	<base>
+		<!-- Presented in alphabetic order of the .lua file in the /scripts folder -->
 
 		<!-- automatic_range_modifier -->
-		<script name="RangedAttack" file="scripts/automatic_range_modifier/ranged_attacks.lua" />	<!-- Handles ranged attack modifiers -->						
-		<script name="RangeFinder" file="scripts/automatic_range_modifier/range_finder.lua" />	<!-- Returns the distance between two tokens -->						
-		<script name="TokenHelper" file="scripts/automatic_range_modifier/token_helper.lua" />	<!-- Helper functions for map tokens, needed for ranged_attacks.lua -->						
-		<script name="ActionAttack" file="scripts/automatic_range_modifier/manager_action_attack.lua" />   <!-- Imported from 5e Ruleset, modified to hook into scripts handling range modifiers for ranged attacks -->				
+		<script name="RangedAttack" file="scripts/automatic_range_modifier/ranged_attacks.lua" />	<!-- Handles ranged attack modifiers -->
+		<script name="RangeFinder" file="scripts/automatic_range_modifier/range_finder.lua" />	<!-- Returns the distance between two tokens -->
+		<script name="TokenHelper" file="scripts/automatic_range_modifier/token_helper.lua" />	<!-- Helper functions for map tokens, needed for ranged_attacks.lua -->
+		<script name="ActionAttack" file="scripts/automatic_range_modifier/manager_action_attack.lua" />   <!-- Imported from 5e Ruleset, modified to hook into scripts handling range modifiers for ranged attacks -->
 
 		<!-- flanking -->
-		<script name="TokenHelper" file="scripts/flanking/token_helper.lua" />        <!-- Custom modifications and additions to the base extension -->		
-		<script name="Flanking" file="scripts/flanking/flanking.lua" />			<!-- Custom script to automatically handle flanking rules -->				
+		<script name="TokenHelper" file="scripts/flanking/token_helper.lua" />        <!-- Custom modifications and additions to the base extension -->
+		<script name="Flanking" file="scripts/flanking/flanking.lua" />			<!-- Custom script to automatically handle flanking rules -->
 
 		<!-- actor_condition.lua: widgets to appear on top of tokens to reflect their condition -->
-		<script name="ActorCondition" file="scripts/actor_condition.lua" />	<!-- Handles detecting and adding conditions as widgets to tokens -->						
+		<script name="ActorCondition" file="scripts/actor_condition.lua" />	<!-- Handles detecting and adding conditions as widgets to tokens -->
 
 		<!-- blood_pool.lua: on actor death, controls blood splatter placed under the token as another token -->
-		<script name="BloodPool" file="scripts/blood_pool.lua" />	<!-- Handles adding blood pools/splatter under tokens on actor death -->						
+		<script name="BloodPool" file="scripts/blood_pool.lua" />	<!-- Handles adding blood pools/splatter under tokens on actor death -->
 
-		<!-- content_share.lua: 
-			Content Share into chat, character abilities, spells etc. 
-			allows you and your players to right click on spells, character feats, features and traits and post the descriptive text 
+		<!-- content_share.lua:
+			Content Share into chat, character abilities, spells etc.
+			allows you and your players to right click on spells, character feats, features and traits and post the descriptive text
 			directly to the chat text.
-		-->		
-		<string name="textshare">Post Text in Chat</string>					
-		<icon name="textshare" file="graphics/radial/icon_broadcast.png" />	
+		-->
+		<string name="textshare">Post Text in Chat</string>
+		<icon name="textshare" file="graphics/radial/icon_broadcast.png" />
 
-		<script name="ContentPost" file="scripts/content_share.lua" /> 		
-		
+		<script name="ContentPost" file="scripts/content_share.lua" />
+
 		<includefile source="campaign/record_note.xml" />		<!-- note: <windowclass name="note"> -->
 		<includefile source="campaign/record_ability.xml" />    <!-- pc feat/feature/trait: <windowclass name="ref_ability">  -->
-		<includefile source="campaign/record_power.xml" />	  	<!-- spells: <windowclass name="power"> -->		
-		<includefile source="campaign/record_feat.xml" />	    <!-- Feat from list: <windowclass name="reference_feat"> -->		
-		
-		<!-- ct_actor_highlighter.lua: When token clicked on map, actor owner of that token on the CT is highlighted -->		
-		<script name="CTActorHighlighter" file="scripts/ct_actor_highlighter.lua" />   
+		<includefile source="campaign/record_power.xml" />	  	<!-- spells: <windowclass name="power"> -->
+		<includefile source="campaign/record_feat.xml" />	    <!-- Feat from list: <windowclass name="reference_feat"> -->
 
-		<!-- ct_actor_skipping.lua: Allows for skipping of actors without rolled initiative in CT -->		
-		<script name="CTActorHighlighter" file="scripts/ct_actor_skipping.lua" />   
+		<!-- ct_actor_highlighter.lua: When token clicked on map, actor owner of that token on the CT is highlighted -->
+		<script name="CTActorHighlighter" file="scripts/ct_actor_highlighter.lua" />
 
-		<!-- health_bar.lua: Horizontal Health Bar and larger health dot -->		
-		<script name="HealthGraphicUpdater" file="scripts/health_graphics.lua" />   
+		<!-- ct_actor_skipping.lua: Allows for skipping of actors without rolled initiative in CT -->
+		<script name="CTActorHighlighter" file="scripts/ct_actor_skipping.lua" />
+
+		<!-- health_bar.lua: Horizontal Health Bar and larger health dot -->
+		<script name="HealthGraphicUpdater" file="scripts/health_graphics.lua" />
 		<includefile source="graphics/graphics_icons.xml" />
 
-		<!-- helper_functions.lua: Generic helper functions for the extension -->		
-		<script name="Helper" file="scripts/helper_functions.lua" />   
+		<!-- helper_functions.lua: Generic helper functions for the extension -->
+		<script name="Helper" file="scripts/helper_functions.lua" />
 
-		<!-- combat_manager.lua: From CoreRPG combat_manager.lua, modified for option to skip non-initiatived actors in CT -->		
+		<!-- combat_manager.lua: From CoreRPG combat_manager.lua, modified for option to skip non-initiatived actors in CT -->
 		<!-- <script name="CombatManager" file="scripts/manager_combat.lua" /> -->
 
-		<!-- manager_token_override.lua: code that overrides token manger CoreRPG ruleset code from manager_token.lua, 
-		handles horizontal health bar calling and token faction underlays -->		
-		<script name="TokenManagerOverride" file="scripts/manager_token_override.lua" />   		
+		<!-- manager_token_override.lua: code that overrides token manger CoreRPG ruleset code from manager_token.lua,
+		handles horizontal health bar calling and token faction underlays -->
+		<script name="TokenManagerOverride" file="scripts/manager_token_override.lua" />
 
-		<!-- map_ping.lua: DM map ping -->		
-		<script name="MapPing" file="scripts/map_ping.lua" />   			
+		<!-- map_ping.lua: DM map ping -->
+		<script name="MapPing" file="scripts/map_ping.lua" />
 
-		<!-- no_token_rotate.lua: Stops token rotating on mouse button scroll during token hover, if enabled in menu option -->		
-		<script name="NoTokenRotate" file="scripts/no_token_rotate.lua" />   
+		<!-- no_token_rotate.lua: Stops token rotating on mouse button scroll during token hover, if enabled in menu option -->
+		<script name="NoTokenRotate" file="scripts/no_token_rotate.lua" />
 
 		<!-- menu_item_register: Menu items 5E Enhancer -->
 		<string name="option_header_5eenhancer">5E Enhancer, Battle Map Settings</string>
-		<string name="option_actor_health_widget_conditions">Actor health widget conditions</string>	
-		<string name="option_automatic_ranged_modifiers">Automatic ranged modifiers</string>		
+		<string name="option_actor_health_widget_conditions">Actor health widget conditions</string>
+		<string name="option_automatic_ranged_modifiers">Automatic ranged modifiers</string>
 		<string name="option_blood_on_tokens">Blood on tokens</string>
-		<string name="option_blood_pool">Blood pools on death</string>		
-		<string name="option_height_font_size">Height font size</string>			
-		<string name="option_horizontal_health_bars">Horizontal health bars</string>							
-		<string name="option_larger_health_dots">Larger health dots</string>		
-		<string name="option_show_reach_underlay">Show reach underlay</string>		
-		<string name="option_show_faction_underlay">Show faction/space underlay</string>	
-		<string name="option_skull_or_cross">Skull or cross on actor death</string>				
+		<string name="option_blood_pool">Blood pools on death</string>
+		<string name="option_height_font_size">Height font size</string>
+		<string name="option_horizontal_health_bars">Horizontal health bars</string>
+		<string name="option_larger_health_dots">Larger health dots</string>
+		<string name="option_show_reach_underlay">Show reach underlay</string>
+		<string name="option_show_faction_underlay">Show faction/space underlay</string>
+		<string name="option_skull_or_cross">Skull or cross on actor death</string>
 		<!-- <string name="option_stop_token_rotate">Stop token rotation</string> -->
 		<string name="option_token_remove_button_combo">Token deletion button combination</string>
-		<string name="option_height_font_size">Token height font size</string>		
-		<string name="option_gm_underlay_show_ct_active_actor_underlay">Token underlay for CT active actor (DM only)</string>	
-		<string name="option_gm_underlay_opacity">Token underlay opacity (DM only)</string>				
-		<string name="option_gm_underlay_size">Token underlay size (DM only)</string>	
+		<string name="option_height_font_size">Token height font size</string>
+		<string name="option_gm_underlay_show_ct_active_actor_underlay">Token underlay for CT active actor (DM only)</string>
+		<string name="option_gm_underlay_opacity">Token underlay opacity (DM only)</string>
+		<string name="option_gm_underlay_size">Token underlay size (DM only)</string>
 		<string name="option_flanking_rules">Use flanking rules (for medium sizes and smaller only)</string>
 		<string name="option_ranged_melee_modifier">Ranged in melee modifier (for medium sizes and smaller only)</string>
 		<!-- <string name="option_range_rules_used">Range rules to use</string>	 -->
-		<string name="option_token_rotation_with_alt">Lock token rotation to Alt + Mouse Wheel</string>	
+		<string name="option_token_rotation_with_alt">Lock token rotation to Alt + Mouse Wheel</string>
 		<string name="option_skip_non_initiatived_actor">Skip CT actors that haven't rolled intitiative</string>
 	    <string name="option_saving_throw_graphics">Saving throw graphics</string>
-		
-	
 
-		<!-- Adds menu items for the extension -->											
-		<script name="MenuItemRegister" file="scripts/menu_item_register.lua" />        		
 
-		<!-- minmize_window_on_dblclick.lua: Minimize windows by double clicking the mouse on top of the window -->		
-		<script name="MinimizeWindowOnDblClick" file="scripts/minimize_window_on_dblclick.lua" />        
 
-		<!-- token_effects_handler.lua: Remove effect if already on CT entry, label version of effects -->			
+		<!-- Adds menu items for the extension -->
+		<script name="MenuItemRegister" file="scripts/menu_item_register.lua" />
+
+		<!-- minmize_window_on_dblclick.lua: Minimize windows by double clicking the mouse on top of the window -->
+		<script name="MinimizeWindowOnDblClick" file="scripts/minimize_window_on_dblclick.lua" />
+
+		<!-- token_effects_handler.lua: Remove effect if already on CT entry, label version of effects -->
 		<script name="EffectsManager" file="scripts/token_effects_handler.lua" />
 
 		<!-- token_height.lua: Manages height widgets and corresponding db entries for tokens. -->
-		<script name="TokenHeight" file="scripts/token_height.lua" />   		
+		<script name="TokenHeight" file="scripts/token_height.lua" />
 
 		<!-- token_hightlighter.lua: Adds a underlay to token for the active CT actor. Different color depending on faction.  -->
-		<script name="TokenHighlighter" file="scripts/token_highlighter.lua" />   				
+		<script name="TokenHighlighter" file="scripts/token_highlighter.lua" />
 
 		<!-- token_remover.lua: Mouse and button click to remove tokens from map, or map and CT. -->
-		<script name="TokenRemover" file="scripts/token_remover.lua" />   
+		<script name="TokenRemover" file="scripts/token_remover.lua" />
 
 		<!-- token_save_graphics: overriding 5E Ruleset manager_action_save.lua functions to draw save result graphics on tokens, after saving throw has been thrown-->
-		<script name="TokenSaveGraphics" file="scripts/token_save_graphics.lua" />    
+		<script name="TokenSaveGraphics" file="scripts/token_save_graphics.lua" />
 
 		<!-- token_wheel_manager.lua: Height manager for tokens -->
-		<script name="TokenWheelManager" file="scripts/token_wheel_manager.lua" />   
-		<includefile source="graphics/graphics_fonts.xml" />					
+		<script name="TokenWheelManager" file="scripts/token_wheel_manager.lua" />
+		<includefile source="graphics/graphics_fonts.xml" />
 
 		<!-- window_resize.lua: Resizing windows on the fly according to menu settings. -->
 		<script name="WindowResize" file="scripts/window_resize.lua" />
 
 		<!-- menu_item_register: Menu items for Interface Modifier 5E -->
-		<string name="option_header_5eenhancher_window_resizing">5E Enhancer, Window Resizing</string>			
-		<string name="option_backgrounds">Backgrounds</string>		
-		<string name="option_classes">Classes</string>	
-		<string name="option_npc_powers">CT NPC powers</string>	
-		<string name="option_feats">Feats</string>	
-		<string name="option_items">Items</string>	
-		<string name="option_notes">Notes</string>	
-		<string name="option_npc">NPC</string>	
-		<string name="option_races">Races</string>	
-		<string name="option_pc_ability">PC abilities</string>			
-		<string name="option_skills">Skills</string>	
-		<string name="option_story">Story</string>	
-		<string name="option_spells">Spells</string>	
-		<string name="option_quests">Quests</string>					        
-	
-		<!-- <script name="ImageRange" file="campaign/scripts/image.lua" /> --> 
-		
-		<!-- overriding the coreRPG: /campaigns/scripts/image.lua, in order to override the range number drawn next to targeting arrows -->>			
-		<template name="image_record_step">
+		<string name="option_header_5eenhancher_window_resizing">5E Enhancer, Window Resizing</string>
+		<string name="option_backgrounds">Backgrounds</string>
+		<string name="option_classes">Classes</string>
+		<string name="option_npc_powers">CT NPC powers</string>
+		<string name="option_feats">Feats</string>
+		<string name="option_items">Items</string>
+		<string name="option_notes">Notes</string>
+		<string name="option_npc">NPC</string>
+		<string name="option_races">Races</string>
+		<string name="option_pc_ability">PC abilities</string>
+		<string name="option_skills">Skills</string>
+		<string name="option_story">Story</string>
+		<string name="option_spells">Spells</string>
+		<string name="option_quests">Quests</string>
+
+		<!-- <script name="ImageRange" file="campaign/scripts/image.lua" /> -->
+
+		<!-- overriding the coreRPG: /campaigns/scripts/image.lua, in order to override the range number drawn next to targeting arrows -->>
+		<!-- <template name="image_record_step">
 			<imagecontrol name="image">
 				<indicators locked="image_locked" loading="image_loading" />
 				<default snap="on" drawingsize="500,500" />
 				<script file="campaign/scripts/image.lua" />
 			</imagecontrol>
-		</template>
+		</template> -->
 
 		<!-- 5E Enhancer Icon -->
-		<icon name="ce_icon" file="graphics/icons/5E_enhancer_icon.png" />				
-	</base>			
+		<icon name="ce_icon" file="graphics/icons/5E_enhancer_icon.png" />
+	</base>
 
-	<announcement text="5E Enhancer v0.11.0" font="emotefont" icon="ce_icon" />			
+	<announcement text="5E Enhancer v0.11.0" font="emotefont" icon="ce_icon" />
 </root>

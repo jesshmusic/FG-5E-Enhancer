@@ -7,14 +7,14 @@ function updateHealthCondition(tokenCT, nPercentWounded, sStatus)
 	<icon name="health_moderate" file="graphics/token/health/health_moderate.png" />
 	<icon name="health_heavy" file="graphics/token/health/health_heavy.png" />
     <icon name="health_critical" file="graphics/token/health/health_critical.png" />
-            
+
     <icon name="health_dying" file="graphics/token/health/health_pc_dying_1.png" />
 	<icon name="health_dying_stable" file="graphics/token/health/health_dying_stable.png" />
 	<icon name="health_dead" file="graphics/token/health/health_dead.png" />
-    <icon name="health_dead_cross" 
+    <icon name="health_dead_cross"
     ]]--
 
-    -- remove old widget graphics if any before drawing new one, also clears 
+    -- remove old widget graphics if any before drawing new one, also clears
     --local aWidgets = TokenManagerOverride.getWidgetList(tokenCT, "");
     -- local widgetActorCondition = aWidgets["actor_condition"];
 
@@ -23,7 +23,7 @@ function updateHealthCondition(tokenCT, nPercentWounded, sStatus)
     if widgetActorCondition then
         widgetActorCondition.destroy();
     end
-    local widgetBloodPool = tokenCT.findWidget("blood_pool");    
+    local widgetBloodPool = tokenCT.findWidget("blood_pool");
 
     if (sStatus == 'Moderate') then
         if ( OptionsManager.getOption('CE_BOT') == "on" ) then
@@ -39,21 +39,17 @@ function updateHealthCondition(tokenCT, nPercentWounded, sStatus)
         end
     elseif (sStatus == 'Dying' or sStatus == 'Dying (1)' or sStatus == 'Dying (2)') then
         if ( OptionsManager.getOption('CE_SC') == "option_skull" ) or ( OptionsManager.getOption('CE_SC') == "option_cross" ) then
-            
+
             local ctNode = CombatManager.getCTFromToken(tokenCT);
-            local ctEntryLink = DB.getChild(ctNode, "link");
-            local ctEntryClass = DB.getChild(ctEntryLink, "class");
-            local linkChildren = DB.getChildren(ctEntryLink, ctEntryLink.getPath())
-
-            Debug.chat('db entries', ctNode, ctEntryLink, ctEntryClass, linkChildren);
-            -- ctEntryClass = DB.findNode(ctNode .. '.link.class');
-            -- Debug.chat('ctEntryClass', ctEntryClass);
-            local ctEntryClassValue = DB.getValue(ctEntryClass);
-            Debug.chat('value', ctEntryClassValue)
-
-            if (ctEntryClassValue == 'charsheet') then
-                widgetActorCondition = tokenCT.addBitmapWidget("health_dying");
-            end 
+            local sClass, sRecord = DB.getValue(ctNode, "link", "", "");
+            Debug.chat('db entries', sClass, sRecord);
+            if (sClass == 'charsheet') then
+              widgetActorCondition = tokenCT.addBitmapWidget("health_dying");
+            elseif ( OptionsManager.getOption('CE_SC') == "option_skull" ) then
+                widgetActorCondition = tokenCT.addBitmapWidget("health_dead");
+            elseif ( OptionsManager.getOption('CE_SC') == "option_cross" ) then
+                widgetActorCondition = tokenCT.addBitmapWidget("health_dead_cross");
+            end
         end
     elseif (sStatus == 'Dead') then
          -- add skull or cross on actor death if enabled
@@ -75,9 +71,9 @@ function updateHealthCondition(tokenCT, nPercentWounded, sStatus)
     end
 
     if (widgetActorCondition ~= nil) then
-        widgetActorCondition.setName("actor_condition");	
+        widgetActorCondition.setName("actor_condition");
         Helper.resizeForTokenSize(tokenCT, widgetActorCondition);
-        widgetActorCondition.setPosition("center", 0, 0);	
+        widgetActorCondition.setPosition("center", 0, 0);
         widgetActorCondition.bringToFront();
         widgetActorCondition.setVisible(true);
     end
