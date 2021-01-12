@@ -25,30 +25,11 @@
 		<script name="TokenHelper" file="scripts/automatic_range_modifier/token_helper.lua" />	<!-- Helper functions for map tokens, needed for ranged_attacks.lua -->
 		<script name="ActionAttack" file="scripts/automatic_range_modifier/manager_action_attack.lua" />   <!-- Imported from 5e Ruleset, modified to hook into scripts handling range modifiers for ranged attacks -->
 
-		<!-- flanking -->
-		<script name="TokenHelper" file="scripts/flanking/token_helper.lua" />        <!-- Custom modifications and additions to the base extension -->
-		<script name="Flanking" file="scripts/flanking/flanking.lua" />			<!-- Custom script to automatically handle flanking rules -->
-
 		<!-- actor_condition.lua: widgets to appear on top of tokens to reflect their condition -->
 		<script name="ActorCondition" file="scripts/actor_condition.lua" />	<!-- Handles detecting and adding conditions as widgets to tokens -->
 
 		<!-- blood_pool.lua: on actor death, controls blood splatter placed under the token as another token -->
 		<script name="BloodPool" file="scripts/blood_pool.lua" />	<!-- Handles adding blood pools/splatter under tokens on actor death -->
-
-		<!-- content_share.lua:
-			Content Share into chat, character abilities, spells etc.
-			allows you and your players to right click on spells, character feats, features and traits and post the descriptive text
-			directly to the chat text.
-		-->
-		<string name="textshare">Post Text in Chat</string>
-		<icon name="textshare" file="graphics/radial/icon_broadcast.png" />
-
-		<script name="ContentPost" file="scripts/content_share.lua" />
-
-		<includefile source="campaign/record_note.xml" />		<!-- note: <windowclass name="note"> -->
-		<includefile source="campaign/record_ability.xml" />    <!-- pc feat/feature/trait: <windowclass name="ref_ability">  -->
-		<includefile source="campaign/record_power.xml" />	  	<!-- spells: <windowclass name="power"> -->
-		<includefile source="campaign/record_feat.xml" />	    <!-- Feat from list: <windowclass name="reference_feat"> -->
 
 		<!-- ct_actor_highlighter.lua: When token clicked on map, actor owner of that token on the CT is highlighted -->
 		<script name="CTActorHighlighter" file="scripts/ct_actor_highlighter.lua" />
@@ -66,15 +47,9 @@
 		<!-- Override some base functions -->
 		<script name="CombatManagerCustom" file="scripts/manager_combat_custom.lua" />
 
-		<!-- combat_manager.lua: From CoreRPG combat_manager.lua, modified for option to skip non-initiatived actors in CT -->
-		<!-- <script name="CombatManager" file="scripts/manager_combat.lua" /> -->
-
 		<!-- manager_token_override.lua: code that overrides token manger CoreRPG ruleset code from manager_token.lua,
 		handles horizontal health bar calling and token faction underlays -->
 		<script name="TokenManagerOverride" file="scripts/manager_token_override.lua" />
-
-		<!-- map_ping.lua: DM map ping -->
-		<script name="MapPing" file="scripts/map_ping.lua" />
 
 		<!-- no_token_rotate.lua: Stops token rotating on mouse button scroll during token hover, if enabled in menu option -->
 		<script name="NoTokenRotate" file="scripts/no_token_rotate.lua" />
@@ -91,18 +66,16 @@
 		<string name="option_show_reach_underlay">Show reach underlay</string>
 		<string name="option_show_faction_underlay">Show faction/space underlay</string>
 		<string name="option_skull_or_cross">Skull or cross on actor death</string>
-		<!-- <string name="option_stop_token_rotate">Stop token rotation</string> -->
 		<string name="option_token_remove_button_combo">Token deletion button combination</string>
 		<string name="option_height_font_size">Token height font size</string>
 		<string name="option_gm_underlay_show_ct_active_actor_underlay">Token underlay for CT active actor (DM only)</string>
 		<string name="option_gm_underlay_opacity">Token underlay opacity (DM only)</string>
 		<string name="option_gm_underlay_size">Token underlay size (DM only)</string>
-		<string name="option_flanking_rules">Use flanking rules (for medium sizes and smaller only)</string>
 		<string name="option_ranged_melee_modifier">Ranged in melee modifier (for medium sizes and smaller only)</string>
 		<!-- <string name="option_range_rules_used">Range rules to use</string>	 -->
 		<string name="option_token_rotation_with_alt">Lock token rotation to Alt + Mouse Wheel</string>
 		<string name="option_skip_non_initiatived_actor">Skip CT actors that haven't rolled intitiative</string>
-	    <string name="option_saving_throw_graphics">Saving throw graphics</string>
+    <string name="option_saving_throw_graphics">Saving throw graphics</string>
 
 
 
@@ -130,36 +103,6 @@
 		<!-- token_wheel_manager.lua: Height manager for tokens -->
 		<script name="TokenWheelManager" file="scripts/token_wheel_manager.lua" />
 		<includefile source="graphics/graphics_fonts.xml" />
-
-		<!-- window_resize.lua: Resizing windows on the fly according to menu settings. -->
-		<script name="WindowResize" file="scripts/window_resize.lua" />
-
-		<!-- menu_item_register: Menu items for Interface Modifier 5E -->
-		<string name="option_header_5eenhancher_window_resizing">5E Enhancer, Window Resizing</string>
-		<string name="option_backgrounds">Backgrounds</string>
-		<string name="option_classes">Classes</string>
-		<string name="option_npc_powers">CT NPC powers</string>
-		<string name="option_feats">Feats</string>
-		<string name="option_items">Items</string>
-		<string name="option_notes">Notes</string>
-		<string name="option_npc">NPC</string>
-		<string name="option_races">Races</string>
-		<string name="option_pc_ability">PC abilities</string>
-		<string name="option_skills">Skills</string>
-		<string name="option_story">Story</string>
-		<string name="option_spells">Spells</string>
-		<string name="option_quests">Quests</string>
-
-		<!-- <script name="ImageRange" file="campaign/scripts/image.lua" /> -->
-
-		<!-- overriding the coreRPG: /campaigns/scripts/image.lua, in order to override the range number drawn next to targeting arrows -->>
-		<!-- <template name="image_record_step">
-			<imagecontrol name="image">
-				<indicators locked="image_locked" loading="image_loading" />
-				<default snap="on" drawingsize="500,500" />
-				<script file="campaign/scripts/image.lua" />
-			</imagecontrol>
-		</template> -->
 
 		<!-- 5E Enhancer Icon -->
 		<icon name="ce_icon" file="graphics/icons/5E_enhancer_icon.png" />
