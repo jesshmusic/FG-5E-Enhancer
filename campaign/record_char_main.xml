@@ -1,0 +1,333 @@
+<root>
+	<windowclass name="charsheet_main" merge="join">
+		<!--override onHealthChanged to change the color of the new Current HP field-->
+		<!-- zuilin: added onInit to set the character sheet up when first opened -->
+		<script>
+			clickedCurHP = false;
+
+			function onHealthChanged()
+				local sColor = ActorManager2.getWoundColor("pc", getDatabaseNode());
+				curhp.setColor(sColor);
+				wounds.setColor(sColor);
+
+				curhp.setMaxValue(hp.getValue());
+				wounds.setMaxValue(hp.getValue());
+			end
+
+			function onInit()
+				curhp.setValue(hp.getValue() - wounds.getValue());
+				onHealthChanged()
+			end
+		</script>
+
+		<sheetdata>
+
+			<!--Move the Wounds field to the far right from the far left-->
+			<number_charwounds name="wounds" source="hp.wounds">
+				<anchored to="healthtitle" width="40" height="30">
+					<top anchor="bottom" offset="15" />
+					<left anchor="center" offset="70" />
+				</anchored>
+				<tabtarget prev="temphp" next="curhp"/>
+				<script>
+					function onValueChanged()
+						window.curhp.setValue(math.floor(window.hp.getValue() - getValue()));
+						window.onHealthChanged();
+					end
+
+					function onDoubleClick(x,y)
+						window.woundsEdit.setFocus();
+						return true;
+					end
+
+					function onClickRelease(button,x,y)
+						return true;
+					end
+
+					function onClickDown(button,x,y)
+						setFocus();
+						clickedCurHP = false;
+						return true;
+					end
+				</script>
+			</number_charwounds>
+
+			<!--shift the Total HP field to the right-->
+			<!-- zuilin: had to add second call to window.curhp.setValue to get it to update properly after a change -->
+			<number_dropadd name="hp" source="hp.total">
+				<anchored to="healthtitle" width="40" height="30">
+					<top anchor="bottom" offset="15" />
+					<left anchor="center" offset="0" />
+				</anchored>
+				<font>reference-b-large</font>
+				<description textres="hp" />
+				<min value="0" />
+				<tabtarget prev="curhp" next="temphp"/>
+				<script>
+					function onValueChanged()
+						window.wounds.setValue(0);
+						window.curhp.setValue(window.hp.getValue() - window.wounds.getValue());
+						window.onHealthChanged()
+						window.curhp.setValue(window.hp.getValue() - window.wounds.getValue());
+					end
+
+					function onDoubleClick(x,y)
+						window.hpEdit.setFocus();
+						return true;
+					end
+
+					function onClickRelease(button,x,y)
+						return true;
+					end
+
+					function onClickDown(button,x,y)
+						clickedCurHP = false;
+						setFocus();
+						return true;
+					end
+				</script>
+			</number_dropadd>
+
+			<!--shift the Temp HP field to the right-->
+			<!-- zuilin: changed &gt; to > in if draginfo.getNumberData... -->
+			<basicnumber name="temphp" source="hp.temporary">
+				<anchored to="healthtitle" width="40" height="30">
+					<top anchor="bottom" offset="15"/>
+					<left anchor="center" offset="15"/>
+				</anchored>
+				<font>reference-b-large</font>
+				<color>0000AA</color>
+				<description textres="temphp" />
+				<hideonvalue>0</hideonvalue>
+				<tabtarget prev="hp" next="wounds"/>
+				<script>
+					function onDrop(x, y, draginfo)
+						if draginfo.getType() == "number" then
+							if draginfo.getNumberData() > 0 then
+								setValue(draginfo.getNumberData());
+							else
+								setValue(getValue() + draginfo.getNumberData());
+							end
+						end
+
+						return true;
+					end
+
+					function onDoubleClick(x,y)
+						window.temphpEdit.setFocus();
+						return true;
+					end
+
+					function onClickRelease(button,x,y)
+						return true;
+					end
+
+					function onClickDown(button,x,y)
+						clickedCurHP = false;
+						setFocus();
+						return true;
+					end
+				</script>
+			</basicnumber>
+
+			<!--add the new Current HP field-->
+			<!-- zuilin: added clickedCurHP flag so you don't have to hover over current HP to get it to change properly -->
+			<basicnumber name="curhp" insertbefore="wounds">
+				<anchored to="healthtitle" width="40" height="30">
+					<top anchor="bottom" offset="15" />
+					<left anchor="center" offset="-85" />
+				</anchored>
+				<min value="0" />
+				<font>reference-b-large</font>
+				<description textres="hp" />
+				<tabtarget prev="wounds" next="hp"/>
+				<!--update Current HP anytime the Total HP or Current Wounds Updates-->
+				<!-- zuilin: added onEnter -->
+				<script>
+					local bHovering;
+
+					function onValueChanged()
+						if bHovering or clickedCurHP then
+							window.wounds.setValue(math.floor(window.hp.getValue() - getValue()));
+						end
+					end
+
+					function onEnter()
+						window.wounds.setValue(math.floor(window.hp.getValue() - getValue()));
+					end
+
+					function onDoubleClick(x,y)
+						window.currentEdit.setFocus();
+						return true;
+					end
+
+					function onClickRelease(button,x,y)
+						return true;
+					end
+
+					function onClickDown(button,x,y)
+						setFocus();
+						clickedCurHP = true;
+						return true;
+					end
+
+					function onHover(state)
+						bHovering = state;
+					end
+				</script>
+				<invisible />
+			</basicnumber>
+
+			<!--move lable to the left of the new Current HP field-->
+			<label name="hpgroup_label">
+				<anchored to="curhp" position="lefthigh" offset="15,5" />
+				<static textres="hp"/>
+			</label>
+
+			<!--reattach the HD fields to the new layout of the Wound fields-->
+			<windowlist name="hd">
+				<anchored to="hp" position="belowleft" offset="0,10" height="30">
+					<right parent="temphp" />
+				</anchored>
+				<frame name="fieldlight" offset="7,5,7,5" />
+				<columns width="30" fillwidth="true" />
+				<datasource>.classes</datasource>
+				<class>charsheet_hd</class>
+				<sortby><field>name</field></sortby>
+			</windowlist>
+
+			<!--this label has been anchored to wounds instead of temphp-->
+			<stringcontrol name="deathsave_label">
+				<anchored to="wounds" position="belowleft" offset="50,5" width="65" />
+			</stringcontrol>
+
+			<editnumber name="currentEdit">
+				<anchored to="curhp" width="40" height="30">
+					<top anchor="top"/>
+					<left anchor="left"/>
+				</anchored>
+				<script>
+					function onEnter()
+						window.curhp.setValue(window.curhp.getValue() + getValue());
+						window.wounds.setValue(math.floor(window.hp.getValue() - window.curhp.getValue()));
+						window.onHealthChanged();
+						window.curhp.setFocus();
+					end
+
+					function onDoubleClick(x,y)
+						window.curhp.setFocus();
+						return true;
+					end
+
+					function onLoseFocus(button,x,y)
+						window.curhp.setFocus();
+						super.onLoseFocus(button,x,y);
+					end
+				</script>
+			</editnumber>
+
+			<editnumber name="hpEdit">
+				<anchored to="hp" width="40" height="30">
+					<top anchor="top"/>
+					<left anchor="left"/>
+				</anchored>
+				<script>
+					function onEnter()
+						window.hp.setValue(window.hp.getValue() + getValue());
+						window.curhp.setValue(math.floor(window.hp.getValue() - window.wounds.getValue()));
+						window.onHealthChanged();
+						window.hp.setFocus();
+					end
+
+					function onDoubleClick(x,y)
+						window.hp.setFocus();
+						return true;
+					end
+
+					function onLoseFocus(button,x,y)
+						window.hp.setFocus();
+						super.onLoseFocus(button,x,y);
+					end
+				</script>
+			</editnumber>
+
+			<editnumber name="temphpEdit">
+				<anchored to="temphp" width="40" height="30">
+					<top anchor="top"/>
+					<left anchor="left"/>
+				</anchored>
+				<script>
+					function onEnter()
+						window.temphp.setValue(window.temphp.getValue() + getValue());
+						window.temphp.setFocus();
+					end
+
+					function onDoubleClick(x,y)
+						window.temphp.setFocus();
+						return true;
+					end
+
+					function onLoseFocus(button,x,y)
+						window.temphp.setFocus();
+						super.onLoseFocus(button,x,y);
+					end
+				</script>
+			</editnumber>
+
+			<editnumber name="woundsEdit">
+				<anchored to="wounds" width="40" height="30">
+					<top anchor="top"/>
+					<left anchor="left"/>
+				</anchored>
+				<script>
+					function onEnter()
+						window.wounds.setValue(window.wounds.getValue() + getValue());
+						window.curhp.setValue(math.floor(window.hp.getValue() - window.wounds.getValue()));
+						window.onHealthChanged();
+						window.wounds.setFocus();
+					end
+
+					function onDoubleClick(x,y)
+						window.wounds.setFocus();
+						return true;
+					end
+
+					function onLoseFocus(button,x,y)
+						window.wounds.setFocus();
+						super.onLoseFocus(button,x,y);
+					end
+				</script>
+			</editnumber>
+
+		</sheetdata>
+
+	</windowclass>
+
+	<template name="editnumber">
+		<basicnumber mergerule="join">
+			<frame mergerule="replace" name="required" offset="7,5,7,5" />
+			<font>reference-b-large</font>
+			<invisible/>
+			<hideonvalue>0</hideonvalue>
+			<script>
+				function onClickRelease(button,x,y)
+					return true;
+				end
+
+				function onClickDown(button,x,y)
+					setFocus();
+				end
+
+				function onLoseFocus()
+					setVisible(false);
+				end
+
+				function onGainFocus()
+					setValue(0);
+					setVisible(true);
+				end
+			</script>
+		</basicnumber>
+	</template>
+
+</root>

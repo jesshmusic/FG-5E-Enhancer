@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<!-- 
-  Please see the license.html file included with this distribution for 
+<!--
+  Please see the license.html file included with this distribution for
   attribution and copyright information.
 -->
 
@@ -9,20 +9,21 @@
 	<!-- Extension additions START -->
 
 
-	<!-- Tokens - Horizontal Health Bar -->	
+	<icon name="hpCurrentIcon">graphics/icons/logo.png</icon>
+	<!-- Tokens - Horizontal Health Bar -->
 	<icon name="healthbar_horizontal" file="graphics/token/healthbar/token_healthbar_horizontal.png" />
-	<icon name="healthbar_original" file="graphics/token/healthbar/token_healthbar_original.png" />		
+	<icon name="healthbar_original" file="graphics/token/healthbar/token_healthbar_original.png" />
 
 	<!-- Tokens - Larger Health Dot -->
-	<icon name="healthdot_larger" file="graphics/token/healthdot/token_healthdot_larger.png" />	
-	<icon name="healthdot_original" file="graphics/token/healthdot/token_healthdot_original.png" />	
+	<icon name="healthdot_larger" file="graphics/token/healthdot/token_healthdot_larger.png" />
+	<icon name="healthdot_original" file="graphics/token/healthdot/token_healthdot_original.png" />
 
 	<!-- Icons that are posted next to ranged attack output text when using automatic range modifiers -->
 	<icon name="ranged_attack_1" file="graphics/icons/ranged_attack_1.png" />
 	<icon name="ranged_attack_2" file="graphics/icons/ranged_attack_2.png" />
 	<icon name="ranged_attack_3" file="graphics/icons/ranged_attack_3.png" />
-	
-	<!-- Tokens - Actor Standing -->	
+
+	<!-- Tokens - Actor Standing -->
 	<icon name="health_moderate" file="graphics/token/health/health_moderate.png" />
 	<icon name="health_heavy" file="graphics/token/health/health_heavy.png" />
 	<icon name="health_critical" file="graphics/token/health/health_critical.png" />
@@ -32,7 +33,7 @@
 	<icon name="health_dead" file="graphics/token/health/health_dead.png" />
 	<icon name="health_dead_cross" file="graphics/token/health/health_dead_cross.png" />
 
-	<!-- Tokens - Blood Pool -->	
+	<!-- Tokens - Blood Pool -->
 	<icon name="blood_pool_1" file="graphics/token/blood_pool/blood_pool_1.png" />
 	<icon name="blood_pool_2" file="graphics/token/blood_pool/blood_pool_2.png" />
 	<icon name="blood_pool_3" file="graphics/token/blood_pool/blood_pool_3.png" />

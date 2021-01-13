@@ -1,10 +1,336 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <root>
-	<windowclass name="ct_entry" merge="join">
-		<script file="ct/scripts/ct_entry.lua" merge="replace"/>
-		<sheetdata merge="join">
-			<widget_ctentry_onmap name="map_widget" merge="add" insertbefore="isidentified"/>			
+	<windowclass name="combattracker_host" merge="join">
+		<sheetdata>
+			<!--shift the initiative label 40 px to the left
+			change the label to the all-caps version used on the char sheet-->
+			<label_ct name="label_init">
+			<anchored to="header_labels" position="insidetopright" offset="178,3" width="30" />
+			<static textres="char_label_initiative"/>
+			<center/>
+			</label_ct>
+
+			<!--add a new label for current hp-->
+			<label_ct name="label_curhp">
+				<anchored to="header_labels" position="insidetopright" offset="132,3" width="30" />
+				<static textres="hp"/>
+				<tooltip textres="currentHP_CurrentHP" />
+				<center />
+			</label_ct>
+
+			<!--shift the Max HP label-->
+			<label_ct name="label_hp">
+				<anchored to="header_labels" position="insidetopright" offset="93,3" width="30" />
+				<static textres="char_label_hpmax" />
+				<center />
+			</label_ct>
+
+			<!--shift the temporary hp label-->
+			<label_ct name="label_temp">
+				<anchored to="header_labels" position="insidetopright" offset="53,3" width="30" />
+				<static textres="char_label_hptemp" />
+				<center />
+			</label_ct>
+
+			<!--shift the wounds label-->
+			<label_ct name="label_wounds">
+				<anchored to="header_labels" position="insidetopright" offset="13,3" width="30" />
+				<static textres="char_label_wounds" />
+				<tooltip textres="ct_tooltip_wounds" />
+				<center />
+			</label_ct>
+
 		</sheetdata>
 	</windowclass>
+
+	<windowclass name="ct_entry" merge="join">
+		<!--change the color of Current HP to match the color of Wounds-->
+		<script>
+			function onHealthChanged()
+				local sColor, nPercentWounded, sStatus = ActorManager2.getWoundColor("ct", getDatabaseNode());
+				curhp.setColor(sColor);
+
+				wounds.setMaxValue(hptotal.getValue());
+				curhp.setMaxValue(hptotal.getValue());
+
+				local newCurrentHP = math.floor(hptotal.getValue() - wounds.getValue());
+
+				if newCurrentHP ~= curhp.getValue() then
+					curhp.setValue(newCurrentHP);
+				end
+
+				super.onHealthChanged();
+			end
+		</script>
+
+		<script file="ct/scripts/ct_entry.lua" merge="replace"/>
+		<sheetdata merge="join">
+
+			<number_ct_crosslink name="wounds">
+				<script>
+					function onDoubleClick(x,y)
+						window.woundsEdit.setFocus();
+						return true;
+					end
+
+					function onClickRelease(button,x,y)
+						return true;
+					end
+
+					function onClickDown(button,x,y)
+						setFocus();
+						return true;
+					end
+				</script>
+			</number_ct_crosslink>
+
+			<number_ct_crosslink name="hptemp">
+				<script>
+					function onDoubleClick(x,y)
+						window.tempHPEdit.setFocus();
+						return true;
+					end
+
+					function onClickRelease(button,x,y)
+						return true;
+					end
+
+					function onClickDown(button,x,y)
+						setFocus();
+						return true;
+					end
+				</script>
+			</number_ct_crosslink>
+
+			<!--add a min value to HP Total to prevent runtime error-->
+			<number_ct_crosslink name="hptotal">
+				<min value="0" />
+				<script>
+					function onDoubleClick(x,y)
+						window.hpTotalEdit.setFocus();
+						return true;
+					end
+
+					function onClickRelease(button,x,y)
+						return true;
+					end
+
+					function onClickDown(button,x,y)
+						setFocus();
+						return true;
+					end
+				</script>
+			</number_ct_crosslink>
+
+			<!--add the Current HP field-->
+			<number_ct_crosslink name="curhp" insertbefore="initresult">
+				<anchored to="rightanchor" width="30" height="20">
+					<top/>
+					<right anchor="left" relation="relative" offset="-10"/>
+				</anchored>
+				<tabtarget prev="initresult" next="hptotal"/>
+				<min value="0" />
+				<script>
+					function onInit()
+						local nType, node = ActorManager.getTypeAndNodeName(window.getDatabaseNode());
+						if nType == "pc" then
+							addBitmapWidget("field_linked").setPosition("bottomright", 0, -2);
+						end
+
+						super.onInit();
+					end
+
+					function onValueChanged()
+						local newWounds = math.floor(window.hptotal.getValue() - getValue());
+
+						if newWounds ~= window.wounds.getValue() then
+							window.wounds.setValue(newWounds);
+						end
+					end
+
+					function onDoubleClick(x,y)
+						window.currentEdit.setFocus();
+						return true;
+					end
+
+					function onClickRelease(button,x,y)
+						return true;
+					end
+
+					function onClickDown(button,x,y)
+						setFocus();
+						return true;
+					end
+				</script>
+			</number_ct_crosslink>
+
+				<!--add the Current HP into the tab ordered and adjust the position of init-->
+			<number_ct_crosslink name="initresult">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<tabtarget prev="name" next="curhp"/>
+				<script>
+					function onDoubleClick(x,y)
+						window.initEdit.setFocus();
+						return true;
+					end
+
+					function onClickRelease(button,x,y)
+						return true;
+					end
+
+					function onClickDown(button,x,y)
+						setFocus();
+						return true;
+					end
+				</script>
+			</number_ct_crosslink>
+
+			<editnumber name="initEdit">
+				<anchored to="initresult" width="30" height="20">
+					<top anchor="top"/>
+					<left anchor="left"/>
+				</anchored>
+				<script>
+					function onEnter()
+						window.initresult.setValue(window.initresult.getValue() + getValue());
+						window.initresult.setFocus();
+					end
+
+					function onDoubleClick(x,y)
+						window.initresult.setFocus();
+						return true;
+					end
+
+					function onLoseFocus(button,x,y)
+						window.initresult.setFocus();
+						super.onLoseFocus(button,x,y);
+					end
+				</script>
+			</editnumber>
+
+			<editnumber name="currentEdit">
+				<anchored to="curhp" width="30" height="20">
+					<top anchor="top"/>
+					<left anchor="left"/>
+				</anchored>
+				<script>
+					function onEnter()
+						window.wounds.setValue(window.hptotal.getValue() - (window.curhp.getValue() + getValue()));
+						window.curhp.setFocus();
+					end
+
+					function onDoubleClick(x,y)
+						window.curhp.setFocus();
+						return true;
+					end
+
+					function onLoseFocus(button,x,y)
+						window.curhp.setFocus();
+						super.onLoseFocus(button,x,y);
+					end
+				</script>
+			</editnumber>
+
+			<editnumber name="hpTotalEdit">
+				<anchored to="hptotal" width="30" height="20">
+					<top anchor="top"/>
+					<left anchor="left"/>
+				</anchored>
+				<script>
+					function onEnter()
+						window.hptotal.setValue(window.hptotal.getValue() + getValue());
+						window.hptotal.setFocus();
+					end
+
+					function onDoubleClick(x,y)
+						window.hptotal.setFocus();
+						return true;
+					end
+
+					function onLoseFocus(button,x,y)
+						window.hptotal.setFocus();
+						super.onLoseFocus(button,x,y);
+					end
+				</script>
+			</editnumber>
+
+			<editnumber name="tempHPEdit">
+				<anchored to="hptemp" width="30" height="20">
+					<top anchor="top"/>
+					<left anchor="left"/>
+				</anchored>
+				<script>
+					function onEnter()
+						window.hptemp.setValue(window.hptemp.getValue() + getValue());
+						window.hptemp.setFocus();
+					end
+
+					function onDoubleClick(x,y)
+						window.hptemp.setFocus();
+						return true;
+					end
+
+					function onLoseFocus(button,x,y)
+						window.hptemp.setFocus();
+						super.onLoseFocus(button,x,y);
+					end
+				</script>
+			</editnumber>
+
+			<editnumber name="woundsEdit">
+				<anchored to="wounds" width="30" height="20">
+					<top anchor="top"/>
+					<left anchor="left"/>
+				</anchored>
+				<script>
+					function onEnter()
+						window.wounds.setValue(window.wounds.getValue() + getValue());
+						window.wounds.setFocus();
+					end
+
+					function onDoubleClick(x,y)
+						window.wounds.setFocus();
+						return true;
+					end
+
+					function onLoseFocus(button,x,y)
+						window.wounds.setFocus();
+						super.onLoseFocus(button,x,y);
+					end
+				</script>
+			</editnumber>
+			<widget_ctentry_onmap name="map_widget" merge="add" insertbefore="isidentified"/>
+		</sheetdata>
+	</windowclass>
+
+	<template name="editnumber">
+		<basicnumber mergerule="join">
+			<frame mergerule="replace" name="required" offset="7,5,7,5" />
+			<font>reference-b-large</font>
+			<invisible/>
+			<hideonvalue>0</hideonvalue>
+			<script>
+				function onClickRelease(button,x,y)
+					return true;
+				end
+
+				function onClickDown(button,x,y)
+					setFocus();
+				end
+
+				function onLoseFocus()
+					setVisible(false);
+				end
+
+				function onGainFocus()
+					setValue(0);
+					setVisible(true);
+				end
+			</script>
+		</basicnumber>
+	</template>
 </root>
