@@ -18,7 +18,7 @@
 
 	<base>
 		<!-- XML file containing new strings -->
-		<includefile source="strings/strings_CurrentHP.xml" />
+		<includefile source="strings/jesshmusic_Strings.xml" />
 
 		<!-- XML file containing new images -->
 		<includefile source="graphics/graphics_icons.xml" />
