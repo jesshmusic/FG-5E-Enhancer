@@ -3,12 +3,9 @@
 
 function onInit()
 	ActionSave.applySave = applySave;
-	Comm.registerSlashHandler("dsave", deleteSaveWidgets, "5E Enhancer: Delete saves")
 
-    -- add watchers for DB entry for save
-    --DB.addHandler("combattracker.list.*.savingthrowresult", "onAdd", dbWatcher);
-    DB.addHandler("combattracker.list.*.savingthrowresult", "onUpdate", dbWatcher);
-    --DB.addHandler("combattracker.list.*.savingthrowresult", "onDelete", deleteSaveWidgets);
+  -- add watchers for DB entry for save
+  DB.addHandler("combattracker.list.*.savingthrowresult", "onUpdate", dbWatcher);
 end
 
 function dbWatcher(node)

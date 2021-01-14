@@ -17,6 +17,18 @@
 	</properties>
 
 	<base>
+		<!-- readycheck -->
+    <string name="readycheck_window_title">Ready Check</string>
+    <string name="readycheck_button_label">I AM READY!</string>
+    <string name="readycheck_button_label_tooltip">The DM has asked if you are ready, are you?</string>
+
+    <script name="ConnectionManagerADND" file="scripts/manager_connection_adnd.lua" />
+
+    <icon name="chat_success" file="graphics/icons/check_success.png" />
+    <icon name="chat_fail" file="graphics/icons/check_fail.png" />
+
+    <includefile source="utility/utility_readycheck.xml" />
+
 		<!-- XML file containing new strings -->
 		<includefile source="strings/jesshmusic_Strings.xml" />
 
@@ -121,6 +133,7 @@
 		<!-- token_wheel_manager.lua: Height manager for tokens -->
 		<script name="TokenWheelManager" file="scripts/token_wheel_manager.lua" />
 		<includefile source="graphics/graphics_fonts.xml" />
+    <script name="CustomSlashCommands" file="scripts/custom_slash_commands.lua" />
 
 		<!-- 5E Enhancer Icon -->
 		<icon name="ce_icon" file="graphics/icons/5E_enhancer_icon.png" />
