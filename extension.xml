@@ -29,6 +29,11 @@
 
     <includefile source="utility/utility_readycheck.xml" />
 
+		<!-- Window Save -->
+		<script name="WindowSaveHost" file="scripts/window_save_host.lua" />
+		<script name="WindowSaveCore" file="scripts/window_save_core.lua" />
+		<script name="WindowSaveUtility" file="scripts/window_save_utility.lua" />
+
 		<!-- XML file containing new strings -->
 		<includefile source="strings/jesshmusic_Strings.xml" />
 
