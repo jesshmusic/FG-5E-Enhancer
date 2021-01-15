@@ -3,7 +3,7 @@
 -- ------------------------------------------------------------------
 function alertClient(message, recipient)
 	sendEvent({
-		type="wsx_alert",
+		type="window_alert",
 		text=message,
 		recipient=recipient
 	});

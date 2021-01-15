@@ -9,15 +9,15 @@ function onInit()
 		end
 	end
 	
-	OOBManager.registerOOBMsgHandler("wsx_clear", clearUserPreset);
-	OOBManager.registerOOBMsgHandler("wsx_init", initializeClient);
-	OOBManager.registerOOBMsgHandler("wsx_list", listUserPresets);
-	OOBManager.registerOOBMsgHandler("wsx_load", loadUserPreset);
-	OOBManager.registerOOBMsgHandler("wsx_open", openUserPreset);
-	OOBManager.registerOOBMsgHandler("wsx_share", sharePreset);	
-	OOBManager.registerOOBMsgHandler("wsx_restore", restoreWindows);
-	OOBManager.registerOOBMsgHandler("wsx_window_close", onWindowClosed);
-	OOBManager.registerOOBMsgHandler("wsx_window_save", saveWindow);		
+	OOBManager.registerOOBMsgHandler("window_clear", clearUserPreset);
+	OOBManager.registerOOBMsgHandler("window_init", initializeClient);
+	OOBManager.registerOOBMsgHandler("window_list", listUserPresets);
+	OOBManager.registerOOBMsgHandler("window_load", loadUserPreset);
+	OOBManager.registerOOBMsgHandler("window_open", openUserPreset);
+	OOBManager.registerOOBMsgHandler("window_share", sharePreset);	
+	OOBManager.registerOOBMsgHandler("window_restore", restoreWindows);
+	OOBManager.registerOOBMsgHandler("window_window_close", onWindowClosed);
+	OOBManager.registerOOBMsgHandler("window_window_save", saveWindow);		
 end
 
 -- ------------------------------------------------------------------
@@ -175,7 +175,7 @@ function loadUserPreset(presetData)
 						local geometry = windowData.getChild("geometry");
 			
 						WindowSaveUtility.sendEvent({
-							type="wsx_client_open",
+							type="window_client_open",
 							class=class,
 							path=path,
 							height=geometry.getChild("height").getValue(),
@@ -242,7 +242,7 @@ end
 function closeAllWindows(username)
 	if User.isHost() then
 		clearUserPreset({username=username, name="current_session", internalUse=true, suppressAlert=true});
-		WindowSaveUtility.sendEvent({type="wsx_client_close_all", recipient=username});
+		WindowSaveUtility.sendEvent({type="window_client_close_all", recipient=username});
 	end
 end
 

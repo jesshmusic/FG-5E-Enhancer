@@ -16,26 +16,61 @@ local_current_session = {};
 local_restore_session = nil;
 
 function onInit()
-	OOBManager.registerOOBMsgHandler("wsx_alert",
+	OOBManager.registerOOBMsgHandler("window_alert",
 		function (data)
 			local message = {text=data.text};
 			Comm.addChatMessage(message);
 		end
 	);
 
-	OOBManager.registerOOBMsgHandler("wsx_client_open", openWindow);
-	OOBManager.registerOOBMsgHandler("wsx_client_close_all", closeAllWindows);
+	OOBManager.registerOOBMsgHandler("window_client_open", openWindow);
+	OOBManager.registerOOBMsgHandler("window_client_close_all", closeAllWindows);
 
-	WindowSaveUtility.sendEvent({type="wsx_init"});
+	WindowSaveUtility.sendEvent({type="window_init"});
 
 	Interface.onWindowOpened = WindowSaveUtility.mergeFunctions(Interface.onWindowOpened, onWindowOpened);
 	Interface.onWindowClosed = WindowSaveUtility.mergeFunctions(Interface.onWindowClosed, onWindowClosed);
 	Interface.onDesktopClose = WindowSaveUtility.mergeFunctions(Interface.onDesktopClose, onDesktopClose);
+
+	onRestoreAllWindows();
 end
 
 -- ----------------------------------
 -- START Interface event handlers  --
--- ----------------------------------
+-- ------------------------------------
+---------------------------------------------------------------
+-- restoreHandler - Tells host to list presets to current user  --
+-- ---------------------------------------------------------------
+function onRestoreAllWindows()
+	if local_restore_session == nil then
+		closeAllWindows();
+		WindowSaveUtility.sendEvent({type="window_restore"});
+	else
+		local temp_session = local_restore_session;
+		local windowCount = 0;
+
+		closeAllWindows();
+
+		for containerName,windowData in pairs(temp_session) do
+			local path = windowData.path;
+			if windowData.unbound ~= true and path ~= nil and DB.findNode(WindowSaveUtility.decode(path)) == nil then
+				-- Window with path was deleted since saving
+				temp_session[containerName] = nil;
+			else
+				path = path or "";
+				local window = Interface.openWindow(windowData.class, path);
+				window.setSize(windowData.width, windowData.height);
+				window.setPosition(windowData.xPos, windowData.yPos);
+				windowCount = windowCount + 1;
+			end
+		end
+		local message = "[WSX] Restored "..windowCount.." previous window";
+		if windowCount ~= 1 then
+			message = message.."s";
+		end
+		Comm.addChatMessage({text=message});
+	end
+end
 
 -- ------------------------------------------------------------------
 -- onWindowOpened - Tells host the current user opened a window    --
@@ -65,7 +100,7 @@ function onWindowClosed(window)
 		if path ~= nil then path = path.getPath() end
 
 		WindowSaveUtility.sendEvent({
-			type="wsx_window_close",
+			type="window_window_close",
 			class=window.getClass(),
 			path=path
 		});
@@ -102,7 +137,7 @@ end
 -- saveWindow - Tells host geometry of a window for a preset             --
 -- ------------------------------------------------------------------------
 function handleSave(nameText)
-	WindowSaveUtility.sendEvent({type="wsx_clear", name=nameText, suppressAlert="yes", remake="yes"});
+	WindowSaveUtility.sendEvent({type="window_clear", name=nameText, suppressAlert="yes", remake="yes"});
 	local windowCount = 0;
 	for _,window in pairs(local_current_session) do
 		local sentData = saveWindow({name=nameText, window=window});
@@ -136,7 +171,7 @@ function saveWindow(windowData)
 	end
 
 	local eventData = {
-		type="wsx_window_save",
+		type="window_window_save",
 		name=windowData.name,
 		class=class,
 		path=path,

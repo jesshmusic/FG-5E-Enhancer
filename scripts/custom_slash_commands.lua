@@ -10,18 +10,18 @@ function onInit()
   	Comm.registerSlashHandler("dsave", TokenSaveGraphics.deleteSaveWidgets, "5E Enhancer: Delete saves");
   end
 
-	Comm.registerSlashHandler('wsx_clear', clearHandler);
-	Comm.registerSlashHandler('wsx_close', closeHandler);
-	Comm.registerSlashHandler('wsx_help', helpHandler);
-	Comm.registerSlashHandler('wsx_list', listHandler);
-	Comm.registerSlashHandler('wsx_load', loadHandler);
-	Comm.registerSlashHandler('wsx_open', openHandler);
-	Comm.registerSlashHandler('wsx_restore', restoreHandler);
-	Comm.registerSlashHandler('wsx_save', saveHandler);
+	Comm.registerSlashHandler('window_clear', clearHandler);
+	Comm.registerSlashHandler('window_close', closeHandler);
+	Comm.registerSlashHandler('window_help', helpHandler);
+	Comm.registerSlashHandler('window_list', listHandler);
+	Comm.registerSlashHandler('window_load', loadHandler);
+	Comm.registerSlashHandler('window_open', openHandler);
+	Comm.registerSlashHandler('window_restore', restoreHandler);
+	Comm.registerSlashHandler('window_save', saveHandler);
 end
 
 -- ------------------------------------------------------------------
--- slashHandler - Parses /wsx for command and arguments            --
+-- slashHandler - Parses /window_for command and arguments            --
 -- ------------------------------------------------------------------
 function slashHandler(_, userInput)
 	local delimiterIndex = userInput:find("%s");
@@ -75,7 +75,7 @@ function clearHandler(_, name)
 		Comm.addChatMessage({text="[WSX] Preset name required to remove"});
 	else
 		name = WindowSaveUtility.cleanInput(name);
-		WindowSaveUtility.sendEvent({type="wsx_clear", name=name});
+		WindowSaveUtility.sendEvent({type="window_clear", name=name});
 	end
 end
 
@@ -91,19 +91,19 @@ end
 -- helpHandler - Tells user of all slash commands --
 -- -------------------------------------------------
 function helpHandler(_, slashCommand)
-	Comm.addChatMessage({text="[WSX] Window Saver X commands: "})
-	Comm.addChatMessage({text="/wsx clear [name] - Deletes the preset named [name]"});
-	Comm.addChatMessage({text="/wsx close - Closes all open windows"});
-	Comm.addChatMessage({text="/wsx help - Displays this message"});
-	Comm.addChatMessage({text="/wsx list [page number] - Lists your saved presets"});
-	Comm.addChatMessage({text="/wsx load [name] - Closes all open windows, then opens windows in the preset [name]"});
-	Comm.addChatMessage({text="/wsx open [name] - Opens windows in the preset [name] without closing windows"});
-	Comm.addChatMessage({text="/wsx restore - Reopens all windows closed by the last time you quit the game or loaded a preset"});
-	Comm.addChatMessage({text="/wsx save [name] - Saves a preset as [name]"});
+	Comm.addChatMessage({text="Window commands: "})
+	Comm.addChatMessage({text="/window_clear [name] - Deletes the preset named [name]"});
+	Comm.addChatMessage({text="/window_close - Closes all open windows"});
+	Comm.addChatMessage({text="/window_help - Displays this message"});
+	Comm.addChatMessage({text="/window_list [page number] - Lists your saved presets"});
+	Comm.addChatMessage({text="/window_load [name] - Closes all open windows, then opens windows in the preset [name]"});
+	Comm.addChatMessage({text="/window_open [name] - Opens windows in the preset [name] without closing windows"});
+	Comm.addChatMessage({text="/window_restore - Reopens all windows closed by the last time you quit the game or loaded a preset"});
+	Comm.addChatMessage({text="/window_save [name] - Saves a preset as [name]"});
 
 	if User.isHost() then
 		Comm.addChatMessage({text="GM only commands:"});
-		Comm.addChatMessage({text="/wsx share [name] - Opens windows in the preset for everyone, sharing windows as needed"});
+		Comm.addChatMessage({text="/window_share [name] - Opens windows in the preset for everyone, sharing windows as needed"});
 	end
 end
 
@@ -111,7 +111,7 @@ end
 -- listHandler - Tells host to list presets to current user     --
 -- ---------------------------------------------------------------
 function listHandler(_, page)
-	WindowSaveUtility.sendEvent({type="wsx_list", page=page});
+	WindowSaveUtility.sendEvent({type="window_list", page=page});
 end
 
 -- ---------------------------------------------------------------
@@ -122,7 +122,7 @@ function loadHandler(_, name)
 		Comm.addChatMessage({text="[WSX] Preset name required to load"});
 	else
 		name = WindowSaveUtility.cleanInput(name);
-		WindowSaveUtility.sendEvent({type="wsx_load", name=name});
+		WindowSaveUtility.sendEvent({type="window_load", name=name});
 	end
 end
 
@@ -131,10 +131,10 @@ end
 -- ---------------------------------------------------------------
 function openHandler(_, name)
 	if name == "" then
-		Comm.addChatMessage({text="[WSX] Preset name required to load"});
+    WindowSaveUtility.sendEvent({type="window_open", name='default'});
 	else
 		name = WindowSaveUtility.cleanInput(name);
-		WindowSaveUtility.sendEvent({type="wsx_open", name=name});
+		WindowSaveUtility.sendEvent({type="window_open", name=name});
 	end
 end
 
@@ -142,34 +142,7 @@ end
 -- restoreHandler - Tells host to list presets to current user  --
 -- ---------------------------------------------------------------
 function restoreHandler()
-	if WindowSaveCore.local_restore_session == nil then
-		WindowSaveCore.closeAllWindows();
-		WindowSaveUtility.sendEvent({type="wsx_restore"});
-	else
-		local temp_session = WindowSaveCore.local_restore_session;
-		local windowCount = 0;
-
-		WindowSaveCore.closeAllWindows();
-
-		for containerName,windowData in pairs(temp_session) do
-			local path = windowData.path;
-			if windowData.unbound ~= true and path ~= nil and DB.findNode(WindowSaveUtility.decode(path)) == nil then
-				-- Window with path was deleted since saving
-				temp_session[containerName] = nil;
-			else
-				path = path or "";
-				local window = Interface.openWindow(windowData.class, path);
-				window.setSize(windowData.width, windowData.height);
-				window.setPosition(windowData.xPos, windowData.yPos);
-				windowCount = windowCount + 1;
-			end
-		end
-		local message = "[WSX] Restored "..windowCount.." previous window";
-		if windowCount ~= 1 then
-			message = message.."s";
-		end
-		Comm.addChatMessage({text=message});
-	end
+	WindowSaveCore.onRestoreAllWindows();
 end
 
 -- ---------------------------------------------------------------
@@ -177,7 +150,7 @@ end
 -- ---------------------------------------------------------------
 function saveHandler(_, name)
   if name == "" then
-		Comm.addChatMessage({text="[WSX] Preset name required to save"});
+		WindowSaveCore.handleSave('default');
 	else
     name = WindowSaveUtility.cleanInput(name);
   	WindowSaveCore.handleSave(name);
@@ -192,6 +165,6 @@ function shareHandler(_, name)
 		Comm.addChatMessage({text="[WSX] Preset name required to share"});
 	else
 		name = WindowSaveUtility.cleanInput(name);
-		WindowSaveUtility.sendEvent({type="wsx_share", name=name});
+		WindowSaveUtility.sendEvent({type="window_share", name=name});
 	end
 end
