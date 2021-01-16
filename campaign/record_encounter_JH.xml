@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="battle" merge="join">
+		<frame>recordsheet</frame>
+		<placement>
+			<size width="350" height="400"/>
+		</placement>
+		<sizelimits>
+			<minimum width="350" height="380"/>
+			<dynamic/>
+		</sizelimits>
+		<minimize>minimized_combat</minimize>
+		<tooltip field="name"/>
+		<nodelete/>
+		<script file="campaign/scripts/encounter.lua"/>
+		<sheetdata>
+
+			<buttoncontrol name="addct">
+				<anchored to="contentframe" position="insidetopleft" offset="-5,0" width="40"/>
+				<invisible/>
+			</buttoncontrol>
+
+			<sub_record_header name="header">
+				<class>battle_header</class>
+			</sub_record_header>
+			<frame_record_content name="contentframe"/>
+
+			<label>
+				<anchored to="contentframe" position="insidetopleft" offset="-5,0" width="40"/>
+				<static textres="battle_label_token"/>
+				<center/>
+			</label>
+			<label>
+				<anchored to="contentframe" position="insidetopleft" offset="35,0" width="25"/>
+				<static>#</static>
+				<center/>
+			</label>
+			<label>
+				<anchored to="contentframe" position="insidetopleft" offset="95,0">
+					<right offset="-50"/>
+				</anchored>
+				<static textres="battle_label_name"/>
+				<center/>
+			</label>
+
+			<windowlist name="npcs">
+				<anchored to="contentframe">
+					<left offset="0"/>
+					<top offset="22"/>
+					<right anchor="right" offset="-150"/>
+					<bottom offset="-30"/>
+				</anchored>
+				<child></child>
+				<child>
+					<backcolor>1A40301E</backcolor>
+				</child>
+				<datasource>.npclist</datasource>
+				<class>battle_npc</class>
+				<allowdelete/>
+				<sortby>
+					<field>name</field>
+				</sortby>
+				<empty font="list-empty" gmtextres="battle_emptylist"/>
+				<script file="campaign/scripts/encounter_npclist.lua"/>
+			</windowlist>
+
+			<scrollbar>
+				<anchored to="npcs"/>
+				<target>npcs</target>
+			</scrollbar>
+
+			<label name="enc_map_label">
+				<anchored to="contentframe" height="20">
+					<left parent="npcs" anchor="right" offset="10"/>
+					<top offset="0"/>
+				</anchored>
+				<static text="Map:"/>
+			</label>
+
+			<linkfield name="maplink">
+				<anchored to="contentframe" width="20" height="20">
+					<left anchor="right" offset="-20"/>
+					<top offset="20"/>
+				</anchored>
+				<description field="map"/>
+				<closetoggle/>
+				<script>
+					function onInit()
+						onValueChanged();
+					end
+					function onValueChanged()
+						if isEmpty() then
+							setVisible(false);
+						else
+							setVisible(true);
+						end
+					end
+				</script>
+			</linkfield>
+
+			<stringu name="map">
+				<anchored to="contentframe" height="20">
+					<left parent="npcs" anchor="right" offset="10"/>
+					<top offset="20"/>
+					<right anchor="right" offset="-20"/>
+				</anchored>
+				<script>
+					function onInit()
+						if isEmpty() then
+						record=EnhancedEncounterWindowJH.findNPCMapLink(window.getDatabaseNode());
+							if record then
+								setVisible(false);
+								return EnhancedEncounterWindowJH.addLink_JH(getDatabaseNode().getParent(),"imagewindow",record, "map");
+							end
+						end
+						if not isEmpty() then
+							setVisible(false);
+						end
+
+					end
+
+					function onDrop(x, y, draginfo)
+						if draginfo.isType("shortcut") then
+							local sClass, sRecord = draginfo.getShortcutData();
+							setVisible(false);
+							return EnhancedEncounterWindowJH.addLink_JH(getDatabaseNode().getParent(), sClass, sRecord,"map");
+						end
+					end
+				</script>
+			</stringu>
+
+			<label name="enc_image_label">
+				<anchored to="contentframe" height="20">
+					<left parent="npcs" anchor="right" offset="10"/>
+					<top offset="40"/>
+				</anchored>
+				<static text="Image:"/>
+			</label>
+
+			<linkfield name="imagelink">
+
+				<anchored to="contentframe" width="20" height="20">
+					<left anchor="right" offset="-20"/>
+					<top offset="60"/>
+				</anchored>
+
+				<description field="map"/>
+				<closetoggle/>
+				<script>
+					function onInit()
+						onValueChanged();
+					end
+					function onValueChanged()
+						if isEmpty() then
+							setVisible(false);
+						else
+							setVisible(true);
+						end
+					end
+				</script>
+			</linkfield>
+
+			<stringu name="image">
+				<anchored to="contentframe" height="20">
+					<left parent="npcs" anchor="right" offset="10"/>
+					<top offset="60"/>
+					<right anchor="right" offset="-20"/>
+				</anchored>
+				<script>
+					function onDrop(x, y, draginfo)
+
+						if draginfo.isType("shortcut") then
+							local sClass, sRecord = draginfo.getShortcutData();
+							return EnhancedEncounterWindowJH.addLink_JH(getDatabaseNode().getParent(), sClass, sRecord,"image");
+						end
+					end
+				</script>
+			</stringu>
+
+			<label name="enc_parcel_label">
+				<anchored to="contentframe" height="20">
+					<left parent="npcs" anchor="right" offset="10"/>
+					<top offset="80"/>
+				</anchored>
+				<static text="Parcel:"/>
+			</label>
+
+			<linkfield name="parcellink">
+
+				<anchored to="contentframe" width="20" height="20">
+					<left anchor="right" offset="-20"/>
+					<top offset="100"/>
+				</anchored>
+				<description field="map"/>
+				<closetoggle/>
+				<script>
+					function onInit()
+						onValueChanged();
+					end
+					function onValueChanged()
+						if isEmpty() then
+							setVisible(false);
+						else
+							setVisible(true);
+						end
+					end
+				</script>
+			</linkfield>
+
+			<stringu name="parcel">
+				<anchored to="contentframe" height="20">
+					<left parent="npcs" anchor="right" offset="10"/>
+					<top offset="100"/>
+					<right anchor="right" offset="-20"/>
+				</anchored>
+				<script>
+					function onDrop(x, y, draginfo)
+						if draginfo.isType("shortcut") then
+							local sClass, sRecord = draginfo.getShortcutData();
+							return EnhancedEncounterWindowJH.addLink_JH(getDatabaseNode().getParent(), sClass, sRecord);
+						end
+					end
+				</script>
+
+			</stringu>
+
+			<label name="enc_story_label">
+				<anchored to="contentframe" height="20">
+					<left parent="npcs" anchor="right" offset="10"/>
+					<top offset="120"/>
+				</anchored>
+				<static text="Story:"/>
+			</label>
+
+			<linkfield name="storylink">
+
+				<anchored to="contentframe" width="20" height="20">
+					<left anchor="right" offset="-20"/>
+					<top offset="140"/>
+				</anchored>
+				<description field="map"/>
+				<closetoggle/>
+				<script>
+					function onInit()
+						onValueChanged();
+					end
+					function onValueChanged()
+						if isEmpty() then
+							setVisible(false);
+						else
+							setVisible(true);
+						end
+					end
+				</script>
+			</linkfield>
+
+			<stringu name="story">
+				<anchored to="contentframe" height="20">
+					<left parent="npcs" anchor="right" offset="10"/>
+					<top offset="140"/>
+					<right anchor="right" offset="-20"/>
+				</anchored>
+				<script>
+					function onDrop(x, y, draginfo)
+
+						if draginfo.isType("shortcut") then
+							local sClass, sRecord = draginfo.getShortcutData();
+							return EnhancedEncounterWindowJH.addLink_JH(getDatabaseNode().getParent(), sClass, sRecord);
+						end
+					end
+				</script>
+
+			</stringu>
+
+			<buttoncontrol name="showside">
+				<anchored to="contentframe" position="aboveright" offset="0,-200" width="20" height="30"/>
+				<icon normal="arrowright" pressed="arrowright"/>
+				<tooltip text="Show sidebar"/>
+				<gmvisibleonly/>
+				<script>
+					function onInit()
+						setVisible(true);
+					end
+					function onButtonPress()
+						x,y = window.getSize();
+						window.setSize(x + 150, y);
+						window.npcs.setAnchor("right", "contentframe", "right", "", -200);
+						window.map.setVisible(true);
+						window.map.setAnchor("right", "contentframe", "right", "", -20);
+						window.image.setVisible(true);
+						window.image.setAnchor("right", "contentframe", "right", "", -20);
+						window.parcel.setVisible(true);
+						window.parcel.setAnchor("right", "contentframe", "right", "", -20);
+						window.story.setVisible(true);
+						window.story.setAnchor("right", "contentframe", "right", "", -20);
+						self.setVisible(false);
+						window.hideside.setVisible(true);
+					end
+				</script>
+			</buttoncontrol>
+
+			<buttoncontrol name="hideside">
+				<anchored to="contentframe" position="aboveright" offset="0,-200" width="20" height="30"/>
+				<icon normal="arrowleft" pressed="arrowleft"/>
+				<tooltip text="Hide sidebar"/>
+				<gmvisibleonly/>
+				<script>
+					function onButtonPress()
+						x, y = window.getSize();
+						window.setSize(x - 150, y);
+						window.npcs.setAnchor("right", "contentframe", "right", "", -40);
+
+						if not window.map.isEmpty() then
+						  window.map.setVisible(false);
+						end
+						window.map.setAnchor("right", "contentframe", "right", "", -15);
+
+						if not window.image.isEmpty()then
+							window.image.setVisible(false);
+						end
+						window.image.setAnchor("right", "contentframe", "right", "", -15);
+
+						if not window.parcel.isEmpty() then
+						  window.parcel.setVisible(false);
+						end
+						window.parcel.setAnchor("right", "contentframe", "right", "", -15);
+
+						if not window.story.isEmpty() then
+						  window.story.setVisible(false);
+						end
+						window.story.setAnchor("right", "contentframe", "right", "", -15);
+
+						self.setVisible(false);
+						window.showside.setVisible(true);
+					end
+				</script>
+			</buttoncontrol>
+
+			<button_iedit name="npcs_iedit">
+				<anchored to="contentframe" position="belowright" offset="5,-10"/>
+				<target>npcs</target>
+			</button_iedit>
+
+			<buttoncontrol name="addcombat">
+				<anchored to="contentframe" position="belowleft" offset="0,-25" width="30" height="30"/>
+				<icon normal="addcombat" pressed="addcombatdown"/>
+				<tooltip textres="battle_tooltip_addct"/>
+				<gmvisibleonly/>
+				<script>
+					function onButtonPress()
+						if User.isHost() then
+
+							window.maplink.activate();
+
+							for _,vNPC in pairs(window.npcs.getWindows()) do
+								for _,vMapLink in pairs(vNPC.maplinks.getWindows()) do
+									vMapLink.deleteLink();
+								end
+							end
+
+							CombatManager.addBattle(window.getDatabaseNode());
+							Interface.openWindow("battle",window.getDatabaseNode());
+						end
+
+					end
+				</script>
+			</buttoncontrol>
+
+			<buttoncontrol name="addtomap">
+				<anchored to="contentframe" position="belowleft" offset="35,-25" width="30" height="30"/>
+				<icon normal="addtomap" pressed="addtomapdown"/>
+				<tooltip text="Add combat tracker npcs to map"/>
+				<gmvisibleonly/>
+				<script>
+					function onButtonPress()
+							if User.isHost() then
+								for _,vNPC in pairs(window.npcs.getWindows()) do
+									for _,vMapLink in pairs(vNPC.maplinks.getWindows()) do
+										vMapLink.deleteLink();
+									end
+								end
+
+								if window.maplink then
+										imageWindow=window.maplink.activate();
+										if imageWindow then
+										x,y=imageWindow.getSize();
+									EnhancedEncounterWindowJH.handleFactionDropOnImage(imageWindow.image ,x/2 ,y/2 );
+									end
+								else
+
+								end
+						end
+						Interface.openWindow("battle",window.getDatabaseNode());
+					end
+				</script>
+			</buttoncontrol>
+
+			<buttoncontrol name="shareallimages">
+				"30" height="30" />
+				<anchored to="contentframe" position="belowleft" offset="70,-25" width="30" height="30"/>
+				<icon normal="shareall" pressed="sharealldown"/>
+				<tooltip text="Share map, image, and NPC images"/>
+				<gmvisibleonly/>
+				<script>
+					function onButtonPress()
+						if User.isHost() then
+							mapRecord= window.maplink.activate();
+							if mapRecord then
+								mapRecord.share();
+							end
+
+							imageRecord= window.imagelink.activate();
+							if imageRecord then
+								imageRecord.share();
+							end
+							EnhancedEncounterWindowJH.shareAllNPCImages(window.getDatabaseNode());
+
+						end
+						Interface.openWindow("battle",window.getDatabaseNode());
+					end
+				</script>
+			</buttoncontrol>
+
+			<buttoncontrol name="addps">
+				<anchored to="contentframe" position="belowleft" offset="105,-25" width="30" height="30"/>
+				<icon normal="addparty" pressed="addpartydown"/>
+				<tooltip text="Add encounter to party sheet"/>
+				<gmvisibleonly/>
+				<script>
+					function onButtonPress()
+						if User.isHost() then
+							PartyManager2.addEncounter(window.getDatabaseNode());
+						end
+					end
+				</script>
+			</buttoncontrol>
+
+			<buttoncontrol name="award">
+				<anchored to="contentframe" position="belowleft" offset="140,-25" width="30" height="30"/>
+				<icon normal="awardxp" pressed="awardxpdown"/>
+				<tooltip text="Award xp for encoutners in party sheet"/>
+				<gmvisibleonly/>
+				<script>
+					function onButtonPress()
+						if User.isHost() then
+							PartyManager2.awardEncountersToParty();
+						end
+					end
+				</script>
+			</buttoncontrol>
+
+			<resize_recordsheet/>
+			<close_recordsheet/>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="battle_header">
+		<margins control="0,0,0,2"/>
+		<script>
+			function onInit()
+				update();
+
+				local node = getDatabaseNode();
+				if DB.getValue(node, "generated", 0) == 1 then
+					button_refreshcr.onButtonPress();
+					DB.setValue(node, "generated", "number", 0);
+				end
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				name.setReadOnly(bReadOnly);
+				cr.setReadOnly(bReadOnly);
+				exp.setReadOnly(bReadOnly);
+				button_refreshcr.setVisible(not bReadOnly);
+				button_refreshxp.setVisible(not bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<link_record_header>
+				<class>battle</class>
+			</link_record_header>
+
+			<anchor_record_header_right name="rightanchor"/>
+			<icon_record_locked/>
+			<button_record_locked/>
+
+			<string_record_name name="name">
+				<empty textres="library_recordtype_empty_battle"/>
+			</string_record_name>
+
+			<label name="cr_label">
+				<anchored>
+					<top parent="name" anchor="bottom" offset="7"/>
+					<left offset="15"/>
+				</anchored>
+				<static text="Challenge"/>
+			</label>
+
+			<basicstring name="cr">
+				<anchored to="cr_label" position="righthigh" offset="10,0" width="80" height="20"/>
+				<tabtarget next="exp" prev="name"/>
+				<description text="Challenge for curent party"/>
+				<frame name="fielddark" offset="7,5,7,5"/>
+				<center/>
+			</basicstring>
+			<button_enc_refreshcr name="button_refreshcr">
+				<script>
+					function onInit()onButtonPress();
+					end
+
+					function onButtonPress()
+						window.cr.setValue(EnhancedEncounterWindowJH.calcBattleChallenge(window.getDatabaseNode()));
+					end
+				</script>
+			</button_enc_refreshcr>
+
+			<basicnumber name="exp">
+				<anchored width="60" height="20">
+					<top parent="name" anchor="bottom" offset="7"/>
+					<right offset="-40"/>
+				</anchored>
+				<tabtarget next="npcs" prev="cr"/>
+				<description textres="xp"/>
+			</basicnumber>
+			<label>
+				<anchored to="exp" position="lefthigh" offset="10,0"/>
+				<static textres="xp"/>
+			</label>
+			<button_enc_refreshxp name="button_refreshxp">
+				<script>
+					function onInit()
+						onButtonPress();
+					end
+
+					function onButtonPress()
+						CombatManager2.calcBattleXP(window.getDatabaseNode());
+					end
+				</script>
+			</button_enc_refreshxp>
+
+		</sheetdata>
+	</windowclass>
+
+	<template name="button_new_encounter">
+		<button_text_sm name="text_button">
+			<anchored to="buttonanchor" width="100">
+				<top/>
+				<left anchor="right" relation="relative" offset="5"/>
+			</anchored>
+			<state text="New encounter"/>
+			<script>
+				function onButtonPress()
+					nodeNewBattle = DB.createChild("battle");
+					Interface.toggleWindow("battle", nodeNewBattle);
+				end
+			</script>
+		</button_text_sm>
+	</template>
+
+</root>

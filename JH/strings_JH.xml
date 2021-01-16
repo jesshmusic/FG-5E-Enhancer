@@ -1,0 +1,9 @@
+<root>
+
+	<!--Char Sheet Tweaks-->
+	<string name="skill_value_thievestools">Tools/Items: Thieves Tools</string>
+	<string name="skill_value_artisanstools">Tools/Items: Artisans Tools</string>
+	<string name="skill_value_gamingset">Tools/Items: Gaming Set</string>
+	<string name="skill_value_instrument">Tools/Items: Instrument</string>
+
+</root>

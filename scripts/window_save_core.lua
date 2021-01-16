@@ -64,11 +64,6 @@ function onRestoreAllWindows()
 				windowCount = windowCount + 1;
 			end
 		end
-		local message = "[WSX] Restored "..windowCount.." previous window";
-		if windowCount ~= 1 then
-			message = message.."s";
-		end
-		Comm.addChatMessage({text=message});
 	end
 end
 
@@ -145,13 +140,6 @@ function handleSave(nameText)
 			windowCount = windowCount + 1;
 		end
 	end
-
-	local message = "[WSX] Saved "..windowCount.." window";
-	if windowCount ~= 1 then
-		message = message.."s";
-	end
-	message = message.." to '"..nameText.."'";
-	Comm.addChatMessage({text=message});
 end
 
 function saveWindow(windowData)

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<root>
+
+	<windowclass name="change_log_JH">
+	
+		<frame>recordsheet</frame>
+		<frame>utilitybox</frame>
+		<placement>
+			<size width="400" height="340" />
+			<nosave />
+		</placement>
+		<playercontrol />
+		<nodelete />
+	
+		<sheetdata>
+			<sub_note_header name="header">
+				<class></class>
+			</sub_note_header>
+			<close_utilitybox name="closeutility1"/>
+
+			<frame_note_content name="contentframe" />
+			<formattedtextfield name="log">
+				<anchored to="contentframe" position="over" />
+				<empty textres="ft_empty" hidereadonly="true" />
+				<datasource>.log</datasource>
+			</formattedtextfield>
+			<scrollbar name="logscrollbar">
+				<anchored to="log" />
+				<target>log</target>
+			</scrollbar>
+		
+		</sheetdata>
+		
+	</windowclass>
+	
+	
+	</root>
+	
+	
