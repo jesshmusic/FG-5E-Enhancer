@@ -3,21 +3,6 @@
 ]]--
 
 function updateHealthCondition(tokenCT, nPercentWounded, sStatus)
-    --[[
-	<icon name="health_moderate" file="graphics/token/health/health_moderate.png" />
-	<icon name="health_heavy" file="graphics/token/health/health_heavy.png" />
-    <icon name="health_critical" file="graphics/token/health/health_critical.png" />
-
-    <icon name="health_dying" file="graphics/token/health/health_pc_dying_1.png" />
-	<icon name="health_dying_stable" file="graphics/token/health/health_dying_stable.png" />
-	<icon name="health_dead" file="graphics/token/health/health_dead.png" />
-    <icon name="health_dead_cross"
-    ]]--
-
-    -- remove old widget graphics if any before drawing new one, also clears
-    --local aWidgets = TokenManagerOverride.getWidgetList(tokenCT, "");
-    -- local widgetActorCondition = aWidgets["actor_condition"];
-
     -- remove/clear current condition or blood pool widgets if any
     local widgetActorCondition = tokenCT.findWidget("actor_condition");
     if widgetActorCondition then

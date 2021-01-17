@@ -64,9 +64,7 @@
 			end
 		</script>
 
-		<script file="ct/scripts/ct_entry.lua" merge="replace"/>
 		<sheetdata merge="join">
-
 			<number_ct_crosslink name="wounds">
 				<script>
 					function onDoubleClick(x,y)
@@ -303,7 +301,7 @@
 					end
 				</script>
 			</editnumber>
-			<widget_ctentry_onmap name="map_widget" merge="add" insertbefore="isidentified"/>
+			<!-- <widget_ctentry_onmap name="map_widget" merge="add" insertbefore="isidentified"/> -->
 		</sheetdata>
 	</windowclass>
 

@@ -9,10 +9,10 @@
 	<windowclass name="battle" merge="join">
 		<frame>recordsheet</frame>
 		<placement>
-			<size width="350" height="400"/>
+			<size width="600" height="400"/>
 		</placement>
 		<sizelimits>
-			<minimum width="350" height="380"/>
+			<minimum width="500" height="380"/>
 			<dynamic/>
 		</sizelimits>
 		<minimize>minimized_combat</minimize>
@@ -58,7 +58,7 @@
 				</anchored>
 				<child></child>
 				<child>
-					<backcolor>1A40301E</backcolor>
+					<backcolor>808080</backcolor>
 				</child>
 				<datasource>.npclist</datasource>
 				<class>battle_npc</class>
@@ -348,7 +348,7 @@
 			</button_iedit>
 
 			<buttoncontrol name="addcombat">
-				<anchored to="contentframe" position="belowleft" offset="0,-25" width="30" height="30"/>
+				<anchored to="contentframe" position="belowleft" offset="0,-50" width="30" height="30"/>
 				<icon normal="addcombat" pressed="addcombatdown"/>
 				<tooltip textres="battle_tooltip_addct"/>
 				<gmvisibleonly/>
@@ -373,7 +373,7 @@
 			</buttoncontrol>
 
 			<buttoncontrol name="addtomap">
-				<anchored to="contentframe" position="belowleft" offset="35,-25" width="30" height="30"/>
+				<anchored to="contentframe" position="belowleft" offset="35,-50" width="30" height="30"/>
 				<icon normal="addtomap" pressed="addtomapdown"/>
 				<tooltip text="Add combat tracker npcs to map"/>
 				<gmvisibleonly/>
@@ -403,7 +403,7 @@
 
 			<buttoncontrol name="shareallimages">
 				"30" height="30" />
-				<anchored to="contentframe" position="belowleft" offset="70,-25" width="30" height="30"/>
+				<anchored to="contentframe" position="belowleft" offset="70,-50" width="30" height="30"/>
 				<icon normal="shareall" pressed="sharealldown"/>
 				<tooltip text="Share map, image, and NPC images"/>
 				<gmvisibleonly/>
@@ -428,7 +428,7 @@
 			</buttoncontrol>
 
 			<buttoncontrol name="addps">
-				<anchored to="contentframe" position="belowleft" offset="105,-25" width="30" height="30"/>
+				<anchored to="contentframe" position="belowleft" offset="105,-50" width="30" height="30"/>
 				<icon normal="addparty" pressed="addpartydown"/>
 				<tooltip text="Add encounter to party sheet"/>
 				<gmvisibleonly/>
@@ -442,7 +442,7 @@
 			</buttoncontrol>
 
 			<buttoncontrol name="award">
-				<anchored to="contentframe" position="belowleft" offset="140,-25" width="30" height="30"/>
+				<anchored to="contentframe" position="belowleft" offset="140,-50" width="30" height="30"/>
 				<icon normal="awardxp" pressed="awardxpdown"/>
 				<tooltip text="Award xp for encoutners in party sheet"/>
 				<gmvisibleonly/>
