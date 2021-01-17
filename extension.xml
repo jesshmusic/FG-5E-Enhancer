@@ -80,6 +80,7 @@
 
 		<!-- Override some base functions -->
 		<script name="CombatManagerCustom" file="scripts/manager_combat_custom.lua" />
+		<script name="CombatManagerCustom" file="scripts/manager_color_custom.lua" />
 
 		<!-- manager_token_override.lua: code that overrides token manger CoreRPG ruleset code from manager_token.lua,
 		handles horizontal health bar calling and token faction underlays -->

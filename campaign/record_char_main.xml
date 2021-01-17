@@ -57,7 +57,7 @@
 			<number_dropadd name="hp" source="hp.total">
 				<anchored to="healthtitle" width="40" height="30">
 					<top anchor="bottom" offset="15" />
-					<left anchor="center" offset="0" />
+					<left anchor="center" offset="-40" />
 				</anchored>
 				<font>reference-b-large</font>
 				<description textres="hp" />
@@ -135,7 +135,7 @@
 			<basicnumber name="curhp" insertbefore="wounds">
 				<anchored to="healthtitle" width="40" height="30">
 					<top anchor="bottom" offset="15" />
-					<left anchor="center" offset="-85" />
+					<left anchor="center" offset="-95" />
 				</anchored>
 				<min value="0" />
 				<font>reference-b-large</font>
@@ -175,7 +175,7 @@
 						bHovering = state;
 					end
 				</script>
-				<invisible />
+				<!-- <invisible /> -->
 			</basicnumber>
 
 			<!--move lable to the left of the new Current HP field-->
@@ -187,7 +187,7 @@
 			<!--reattach the HD fields to the new layout of the Wound fields-->
 			<windowlist name="hd">
 				<anchored to="hp" position="belowleft" offset="0,10" height="30">
-					<right parent="temphp" />
+					<right parent="wounds" />
 				</anchored>
 				<frame name="fieldlight" offset="7,5,7,5" />
 				<columns width="30" fillwidth="true" />
