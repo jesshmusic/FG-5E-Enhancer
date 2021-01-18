@@ -99,9 +99,6 @@
 		<!-- Adds menu items for the extension -->
 		<script name="MenuItemRegister" file="scripts/menu_item_register.lua" />
 
-		<!-- token_effects_handler.lua: Remove effect if already on CT entry, label version of effects -->
-		<script name="EffectsManager" file="scripts/token_effects_handler.lua" />
-
 		<!-- token_save_graphics: overriding 5E Ruleset manager_action_save.lua functions to draw save result graphics on tokens, after saving throw has been thrown-->
 		<script name="TokenSaveGraphics" file="scripts/token_save_graphics.lua" />
 
