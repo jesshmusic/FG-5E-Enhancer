@@ -13,7 +13,7 @@
 			<name>5E</name>
 		</ruleset>
 
-		<loadorder>50</loadorder>
+		<loadorder>250</loadorder>
 	</properties>
 
 	<base>

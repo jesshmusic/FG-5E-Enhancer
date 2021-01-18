@@ -175,7 +175,7 @@
 						bHovering = state;
 					end
 				</script>
-				<!-- <invisible /> -->
+				<invisible />
 			</basicnumber>
 
 			<!--move lable to the left of the new Current HP field-->
