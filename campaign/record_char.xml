@@ -1,9 +1,0 @@
-<root>
-	<windowclass name="charsheet" merge="join">
-		<!--change the minimum size of the character sheet to support the new Current HP field-->
-		<sizelimits>
-			<minimum width="480" height="580" />
-			<dynamic />
-		</sizelimits>
-	</windowclass>
-</root>

@@ -2,33 +2,35 @@
 
 <root>
 	<windowclass name="combattracker_client" merge="join">
+		<script file="ct/scripts/clientct_entry_custom.lua" />
 		<!--update the updateHealthDisplay function to include the toggle of label_curhp-->
 		<script>
 			function onInit()
 				super.onInit();
+				Debug.console('Combat Tracker init.');
 				OptionsManager.registerCallback("SHPC", updateHealthDisplay);
 				OptionsManager.registerCallback("SHNPC", updateHealthDisplay);
 				updateHealthDisplay();
 			end
-			
+
 			function onClose()
 				super.onClose();
 				OptionsManager.unregisterCallback("SHPC", updateHealthDisplay);
 				OptionsManager.unregisterCallback("SHNPC", updateHealthDisplay);
 			end
-			
+
 			function updateHealthDisplay()
 				Debug.console("MYIMPLEMENTATION combattracker_client.updateHealthDisplay");
-				
+
 				local sOptSHPC = OptionsManager.getOption("SHPC");
 				local sOptSHNPC = OptionsManager.getOption("SHNPC");
 				local bShowDetail = (sOptSHPC == "detailed") or (sOptSHNPC == "detailed");
-				
+
 				label_hp.setVisible(bShowDetail);
 				label_temp.setVisible(bShowDetail);
 				label_wounds.setVisible(bShowDetail);
 				label_curhp.setVisible(bShowDetail);
-				
+
 				label_status.setVisible(not bShowDetail);
 
 				for _,w in pairs(list.getWindows()) do
@@ -52,12 +54,12 @@
 			<label_ct_right name="label_curhp" insertbefore="label_init">
 				<static textres="hp" />
 				<tooltip textres="currentHP_CurrentHP" />
-			</label_ct_right>			
+			</label_ct_right>
 		</sheetdata>
 	</windowclass>
-  
+
 	<windowclass name="client_ct_entry" merge="join">
-		<script file="ct/scripts/clientct_entry.lua" />
+		<script file="ct/scripts/clientct_entry_custom.lua" />
 		<sheetdata>
 			<base_clientct_health name="healthbase" insertbefore="initresult">
 				<anchored to="rightanchor" width="150" height="20">
@@ -65,7 +67,7 @@
 					<right anchor="left" relation="relative" offset="-10" />
 				</anchored>
 			</base_clientct_health>
-			
+
 			<number_ct_static name="curhp" insertbefore="initresult">
 				<anchored to="hptotal" width="30" height="20">
 					<top/>

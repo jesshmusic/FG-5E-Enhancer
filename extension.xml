@@ -12,11 +12,25 @@
 		<ruleset>
 			<name>5E</name>
 		</ruleset>
-
-		<loadorder>250</loadorder>
 	</properties>
 
 	<base>
+
+		<!-- XML file containing new strings -->
+		<includefile source="strings/jesshmusic_Strings.xml" />
+
+		<!-- XML file containing new images -->
+		<includefile source="graphics/graphics_icons.xml" />
+
+		<!-- Join Character Main Sheet -->
+		<includefile source="campaign/record_char_main.xml" />
+
+		<!--updates the combat tracker to include the total HP for the host-->
+		<includefile source="ct/ct_host.xml" />
+
+		<!--updates the client combat tracker to include the total HP-->
+		<includefile source="ct/ct_client.xml" />
+
 		<!-- Encounter Window -->
 		<includefile source="JH/tools_JH.xml"/>
 		<includefile source="JH/graphics_JH.xml"/>
@@ -45,31 +59,10 @@
 		<script name="WindowSaveHost" file="scripts/window_save_host.lua" />
 		<script name="WindowSaveCore" file="scripts/window_save_core.lua" />
 		<script name="WindowSaveUtility" file="scripts/window_save_utility.lua" />
-
-		<!-- XML file containing new strings -->
-		<includefile source="strings/jesshmusic_Strings.xml" />
-
-		<!-- XML file containing new images -->
-		<includefile source="graphics/graphics_icons.xml" />
-
-		<!-- Join Character Main Sheet -->
-		<includefile source="campaign/record_char_main.xml" />
-
-		<!-- Join Character Sheet -->
-		<includefile source="campaign/record_char.xml" />
-
-		<!--updates the combat tracker to include the total HP for the host-->
-		<includefile source="ct/ct_host.xml" />
-
-		<!--updates the client combat tracker to include the total HP-->
-		<includefile source="ct/ct_client.xml" />
 		<!-- Presented in alphabetic order of the .lua file in the /scripts folder -->
 
 		<!-- actor_condition.lua: widgets to appear on top of tokens to reflect their condition -->
 		<script name="ActorCondition" file="scripts/actor_condition.lua" />	<!-- Handles detecting and adding conditions as widgets to tokens -->
-
-		<!-- ct_actor_highlighter.lua: When token clicked on map, actor owner of that token on the CT is highlighted -->
-		<script name="CTActorHighlighter" file="scripts/ct_actor_highlighter.lua" />
 
 		<!-- health_bar.lua: Horizontal Health Bar and larger health dot -->
 		<script name="HealthGraphicUpdater" file="scripts/health_graphics.lua" />
@@ -80,7 +73,6 @@
 
 		<!-- Override some base functions -->
 		<script name="CombatManagerCustom" file="scripts/manager_combat_custom.lua" />
-		<script name="CombatManagerCustom" file="scripts/manager_color_custom.lua" />
 
 		<!-- manager_token_override.lua: code that overrides token manger CoreRPG ruleset code from manager_token.lua,
 		handles horizontal health bar calling and token faction underlays -->

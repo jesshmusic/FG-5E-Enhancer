@@ -136,6 +136,7 @@
 							addBitmapWidget("field_linked").setPosition("bottomright", 0, -2);
 						end
 
+						Debug.console("JH IMPLEMENTATION: curhp onInit");
 						super.onInit();
 					end
 

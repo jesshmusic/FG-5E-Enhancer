@@ -18,7 +18,7 @@ end
 
 function onHealthChanged()
 	local sColor = ActorManager2.getWoundColor("ct", getDatabaseNode());
-	
+
 	wounds.setColor(sColor);
 	curhp.setColor(sColor);
 	status.setColor(sColor);
@@ -26,18 +26,18 @@ end
 
 function updateHealthDisplay()
 	Debug.console("MY IMPLEMENTATION client_ct_entry.updateHealthDisplay");
-	
+
 	local sOption;
 	local sFriendFoe = friendfoe.getStringValue();
-	
+
 	Debug.console(sFriendFoe);
-	
+
 	if friendfoe.getStringValue() == "friend" then
 		sOption = OptionsManager.getOption("SHPC");
 	else
 		sOption = OptionsManager.getOption("SHNPC");
 	end
-	
+
 	Debug.console(sOption);
 
 	if sOption == "detailed" then
@@ -51,7 +51,7 @@ function updateHealthDisplay()
 		hptotal.setVisible(false);
 		hptemp.setVisible(false);
 		wounds.setVisible(false);
-		curhp.setVisible(false);		
+		curhp.setVisible(false);
 
 		status.setVisible(true);
 	else
@@ -59,7 +59,7 @@ function updateHealthDisplay()
 		hptemp.setVisible(false);
 		wounds.setVisible(false);
 		curhp.setVisible(false);
-		
+
 		status.setVisible(false);
 	end
 end
