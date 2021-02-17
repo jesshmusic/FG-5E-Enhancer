@@ -48,7 +48,9 @@
 		<!--change the color of Current HP to match the color of Wounds-->
 		<script>
 			function onHealthChanged()
-				local sColor, nPercentWounded, sStatus = ActorManager2.getWoundColor("ct", getDatabaseNode());
+				local rActor = ActorManager.resolveActor(getDatabaseNode());
+				local nPercentWounded = ActorHealthManager.getWoundPercent(rActor);
+				local sColor, nPercentWounded, sStatus = ActorHealthManager.getHealthColor(nPercentWounded, false);
 				curhp.setColor(sColor);
 
 				wounds.setMaxValue(hptotal.getValue());

@@ -17,7 +17,9 @@ function onTypeChanged()
 end
 
 function onHealthChanged()
-	local sColor = ActorManager2.getWoundColor("ct", getDatabaseNode());
+	local rActor = ActorManager.resolveActor(getDatabaseNode());
+	local nPercentWounded = ActorHealthManager.getWoundPercent(rActor);
+	local sColor = ActorHealthManager.getHealthColor(nPercentWounded, false);
 
 	wounds.setColor(sColor);
 	curhp.setColor(sColor);

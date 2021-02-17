@@ -6,7 +6,9 @@
 			clickedCurHP = false;
 
 			function onHealthChanged()
-				local sColor = ActorManager2.getWoundColor("pc", getDatabaseNode());
+				local rActor = ActorManager.resolveActor(getDatabaseNode());
+				local nPercentWounded = ActorHealthManager.getWoundPercent(rActor);
+				local sColor = ActorHealthManager.getHealthColor(nPercentWounded, false);
 				curhp.setColor(sColor);
 				wounds.setColor(sColor);
 
