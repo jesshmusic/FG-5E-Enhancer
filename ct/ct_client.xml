@@ -7,7 +7,6 @@
 		<script>
 			function onInit()
 				super.onInit();
-				Debug.console('Combat Tracker init.');
 				OptionsManager.registerCallback("SHPC", updateHealthDisplay);
 				OptionsManager.registerCallback("SHNPC", updateHealthDisplay);
 				updateHealthDisplay();
@@ -20,19 +19,14 @@
 			end
 
 			function updateHealthDisplay()
-				Debug.console("MYIMPLEMENTATION combattracker_client.updateHealthDisplay");
-
 				local sOptSHPC = OptionsManager.getOption("SHPC");
 				local sOptSHNPC = OptionsManager.getOption("SHNPC");
 				local bShowDetail = (sOptSHPC == "detailed") or (sOptSHNPC == "detailed");
-
 				label_hp.setVisible(bShowDetail);
 				label_temp.setVisible(bShowDetail);
 				label_wounds.setVisible(bShowDetail);
 				label_curhp.setVisible(bShowDetail);
-
 				label_status.setVisible(not bShowDetail);
-
 				for _,w in pairs(list.getWindows()) do
 					w.updateHealthDisplay();
 				end
