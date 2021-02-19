@@ -1,11 +1,12 @@
 
 
 COLOR_HEALTH_UNWOUNDED = "00ff00";
-COLOR_HEALTH_LT_WOUNDS = "d5e409";
-COLOR_HEALTH_MOD_WOUNDS = "dd8707";
-COLOR_HEALTH_HVY_WOUNDS = "e53506";
-COLOR_HEALTH_CRIT_WOUNDS = "fc0006";
-COLOR_HEALTH_DYING_OR_DEAD = "A04040";
+COLOR_HEALTH_LT_WOUNDS = "b3ff00";
+COLOR_HEALTH_MOD_LT_WOUNDS = "ffdd00";
+COLOR_HEALTH_MOD_WOUNDS = "ffa600";
+COLOR_HEALTH_HVY_WOUNDS = "ff6200";
+COLOR_HEALTH_CRIT_WOUNDS = "ff0d00";
+COLOR_HEALTH_DYING_OR_DEAD = "ff0000";
 
 COLOR_HEALTH_SIMPLE_WOUNDED = "40ff00";
 COLOR_HEALTH_SIMPLE_BLOODIED = "C11B17";
@@ -37,12 +38,14 @@ function getTieredHealthColor(nPercentWounded)
 	elseif nPercentWounded <= 0 then
 		sColor = COLOR_HEALTH_UNWOUNDED;
 	elseif OptionsManager.isOption("WNDC", "detailed") then
-		if nPercentWounded >= 0.75 then
+		if nPercentWounded >= 0.8 then
 			sColor = COLOR_HEALTH_CRIT_WOUNDS;
-		elseif nPercentWounded >= 0.5 then
+		elseif nPercentWounded >= 0.6 then
 			sColor = COLOR_HEALTH_HVY_WOUNDS;
-		elseif nPercentWounded >= 0.25 then
+		elseif nPercentWounded >= 0.4 then
 			sColor = COLOR_HEALTH_MOD_WOUNDS;
+		elseif nPercentWounded >= 0.2 then
+			sColor = COLOR_HEALTH_MOD_LT_WOUNDS;
 		else
 			sColor = COLOR_HEALTH_LT_WOUNDS;
 		end
