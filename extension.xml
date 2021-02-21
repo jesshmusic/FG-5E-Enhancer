@@ -4,11 +4,12 @@
 
 	<properties>
 		<name>JessHMusic Custom Enhancements for 5E</name>
-		<version>1.0.0</version>
-
-		<author>Jess Hendricks</author>
-		<description>JessHMusic Custom Enhancements for 5E - Based on 5E Enhancer FGU and Current HP Mod</description>
-
+		<version>1.1.0</version>
+		<description>
+			<text>JessHMusic Custom Enhancements for 5E - Based on 5E Enhancer FGU and Current HP Mod</text>
+			<author>Jess Hendricks</author>
+		</description>
+		<loadorder>300</loadorder>
 		<ruleset>
 			<name>5E</name>
 		</ruleset>
@@ -45,14 +46,8 @@
 		<script name="EnhancedEncounterWindowStartJH" file="scripts/enhanced_encounter_window_start_JH.lua" />
 
 		<!-- readycheck -->
-    <string name="readycheck_window_title">Ready Check</string>
-    <string name="readycheck_button_label">I AM READY!</string>
-    <string name="readycheck_button_label_tooltip">The DM has asked if you are ready, are you?</string>
 
     <script name="ConnectionManagerADND" file="scripts/manager_connection_adnd.lua" />
-
-    <icon name="chat_success" file="graphics/icons/check_success.png" />
-    <icon name="chat_fail" file="graphics/icons/check_fail.png" />
 
     <includefile source="utility/utility_readycheck.xml" />
 
@@ -79,16 +74,6 @@
 		handles horizontal health bar calling and token faction underlays -->
 		<script name="TokenManagerOverride" file="scripts/manager_token_override.lua" />
 
-		<!-- menu_item_register: Menu items 5E Enhancer -->
-		<string name="option_header_5eenhancer">Greyhawk Settings</string>
-		<string name="option_actor_health_widget_conditions">Actor health widget conditions</string>
-		<string name="option_blood_on_tokens">Blood on tokens</string>
-		<string name="option_horizontal_health_bars">Horizontal health bars</string>
-		<string name="option_larger_health_dots">Larger health dots</string>
-		<string name="option_skull_or_cross">Skull or cross on actor death</string>
-		<string name="option_token_rotation_with_alt">Lock token rotation to Alt + Mouse Wheel</string>
-    <string name="option_saving_throw_graphics">Saving throw graphics</string>
-
 		<!-- Adds menu items for the extension -->
 		<script name="MenuItemRegister" file="scripts/menu_item_register.lua" />
 
@@ -101,7 +86,12 @@
     <script name="CustomSlashCommands" file="scripts/custom_slash_commands.lua" />
 
 		<!-- 5E Enhancer Icon -->
-		<icon name="ce_icon" file="graphics/icons/5E_enhancer_icon.png" />
+		<includefile source="spell_automation.xml" />
+
+		<script name="EffectManagerADND" file="scripts/manager_effect_adnd.lua" />
+		<includefile source="utility/template_utility_advanced.xml" />
+		<includefile source="utility/utility_effects_advanced.xml" />
+		<includefile source="advanced_effects.xml" />
 	</base>
 
 	<announcement text="JessHMusic Custom Enhancements for 5E" font="emotefont" icon="ce_icon" />

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<root>
+  <windowclass name="char_weapon" merge="join">
+    <margins control="10,10,10,10" />
+    <sheetdata>
+      <genericcontrol name="rightanchor">
+        <anchored width="0" height="0">
+          <middle />
+          <right />
+        </anchored>
+        <invisible />
+      </genericcontrol>
+      <linkfield name="shortcut">
+        <anchored to="rightanchor" width="20" height="20">
+          <middle />
+          <right anchor="left" relation="relative" offset="-2" />
+        </anchored>
+      </linkfield>
+      <button_idelete name="idelete">
+        <anchored to="rightanchor">
+          <middle />
+          <right anchor="left" offset="-2" />
+        </anchored>
+      </button_idelete>
+      <buttoncontrol name="activatedetail">
+        <anchored to="rightanchor" width="30" height="30">
+          <middle />
+          <right anchor="left" relation="relative" offset="-3" />
+        </anchored>
+      </buttoncontrol>
+
+      <genericcontrol name="leftanchor">
+        <anchored width="0" height="0">
+          <top />
+          <left />
+        </anchored>
+        <invisible />
+      </genericcontrol>
+      <button_char_inv_carried name="carried">
+        <anchored to="leftanchor" width="30" height="30">
+          <top offset="5" />
+          <left anchor="right" relation="relative" offset="0" />
+        </anchored>
+      </button_char_inv_carried>
+
+      <stringu name="name">
+        <anchored height="20">
+          <middle />
+          <left parent="leftanchor" anchor="right" relation="relative" offset="10" />
+          <right parent="rightanchor" anchor="left" relation="relative" offset="0" />
+        </anchored>
+      </stringu>
+
+      <stringcontrol name="damageview">
+        <anchored to="rightanchor" width="100">
+          <middle />
+          <right anchor="left" relation="relative" offset="-5" />
+        </anchored>
+        <margins control="15,15,15,15" />
+        <multilinespacing>15</multilinespacing>
+        <font>damageview</font>
+      </stringcontrol>
+    </sheetdata>
+  </windowclass>
+</root>
