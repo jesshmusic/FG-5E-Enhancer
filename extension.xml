@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<root version="3.0" release="1">
+<root version="3.1.4" release="1">
 
 	<properties>
-		<name>JessHMusic Custom Enhancements for 5E</name>
-		<version>1.1.0</version>
+		<name>JessHMusic Custom Enhancements for 5E 3.1.4</name>
+		<version>3.1.4</version>
 		<description>
-			<text>JessHMusic Custom Enhancements for 5E - Based on 5E Enhancer FGU and Current HP Mod</text>
+			<text>JessHMusic Custom Enhancements for 5E</text>
 			<author>Jess Hendricks</author>
 		</description>
-		<loadorder>300</loadorder>
+		<loadorder>78</loadorder>
 		<ruleset>
 			<name>5E</name>
 		</ruleset>
@@ -94,5 +94,5 @@
 		<includefile source="advanced_effects.xml" />
 	</base>
 
-	<announcement text="JessHMusic Custom Enhancements for 5E" font="emotefont" icon="ce_icon" />
+	<announcement text="JessHMusic Custom Enhancements for 5E 3.1.4" font="emotefont" icon="ce_icon" />
 </root>

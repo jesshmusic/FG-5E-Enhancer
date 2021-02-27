@@ -1,24 +1,21 @@
 function onInit()
-	onFactionChanged();
+	super.onInit();
 	onHealthChanged();
 end
 
-function onActiveChanged()
-	updateDisplay();
-end
-
 function onFactionChanged()
-	updateHealthDisplay();
-	updateDisplay();
-end
-
-function onTypeChanged()
+	super.onInit();
 	updateHealthDisplay();
 end
 
 function onHealthChanged()
 	local rActor = ActorManager.resolveActor(getDatabaseNode());
 	local nPercentWounded, sStatus, sColor = ColorManagerCustom.getHealthInfo(rActor);
+	Debug.console('JH onHealthChanged', rActor);
+
+	if not wounds then
+		return;
+	end
 
 	wounds.setColor(sColor);
 	curhp.setColor(sColor);
@@ -26,20 +23,25 @@ function onHealthChanged()
 end
 
 function updateHealthDisplay()
-	Debug.console("MY IMPLEMENTATION client_ct_entry.updateHealthDisplay");
-
 	local sOption;
-	local sFriendFoe = friendfoe.getStringValue();
 
-	Debug.console(sFriendFoe);
+	Debug.console('JH updateHealthDisplay', friendfoe, hptotal);
+
+  if not hptotal then
+		return;
+	end
+
+	if not friendfoe then
+		return;
+	end
+
+	Debug.console('JH updateHealthDisplay called for a ', friendfoe.getStringValue());
 
 	if friendfoe.getStringValue() == "friend" then
 		sOption = OptionsManager.getOption("SHPC");
 	else
 		sOption = OptionsManager.getOption("SHNPC");
 	end
-
-	Debug.console(sOption);
 
 	if sOption == "detailed" then
 		hptotal.setVisible(true);

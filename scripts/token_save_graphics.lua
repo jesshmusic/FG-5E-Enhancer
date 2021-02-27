@@ -49,30 +49,33 @@ end
 
 -- Draw save result bitmap widget on top of token
 function addSaveWidget(ctNode, sSuccess)
+	Debug.console('JH ctNode', ctNode);
+	Debug.console('JH tokenCT', CombatManager.getTokenFromCT(ctNode))
 	local tokenCT = CombatManager.getTokenFromCT(ctNode);
+	if tokenCT then
+		local saveIconName = '';
 
-	local saveIconName = '';
+		if sSuccess == 'SUCCESS' then
+			saveIconName = 'save_success_d20';
+		else
+			saveIconName = 'save_fail_d20';
+		end
 
-	if sSuccess == 'SUCCESS' then
-		saveIconName = 'save_success_d20';
-	else
-		saveIconName = 'save_fail_d20';
+		-- start by deleting any other instances of a save bitmap widget on token before adding a new one if any
+		local saveWidget = tokenCT.findWidget("save");
+
+		-- if saveWidget then
+		-- 	saveWidget.destroy();
+		-- end
+
+		-- add new bitmap save widget
+		saveWidget = tokenCT.addBitmapWidget(saveIconName);
+		saveWidget.setName("save");
+		saveWidget.setPosition("topleft");
+		saveWidget.bringToFront();
+		Helper.resizeForTokenSize(tokenCT, saveWidget, 0.25);
+		saveWidget.setVisible(true);
 	end
-
-	-- start by deleting any other instances of a save bitmap widget on token before adding a new one if any
-	local saveWidget = tokenCT.findWidget("save");
-
-	-- if saveWidget then
-	-- 	saveWidget.destroy();
-	-- end
-
-	-- add new bitmap save widget
-	saveWidget = tokenCT.addBitmapWidget(saveIconName);
-	saveWidget.setName("save");
-	saveWidget.setPosition("topleft");
-	saveWidget.bringToFront();
-	Helper.resizeForTokenSize(tokenCT, saveWidget, 0.25);
-	saveWidget.setVisible(true);
 end
 
 

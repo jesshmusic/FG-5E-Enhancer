@@ -9,7 +9,6 @@
 				super.onInit();
 				OptionsManager.registerCallback("SHPC", updateHealthDisplay);
 				OptionsManager.registerCallback("SHNPC", updateHealthDisplay);
-				updateHealthDisplay();
 			end
 
 			function onClose()
