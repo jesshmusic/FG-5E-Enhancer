@@ -124,8 +124,10 @@ end
 function openWindow(windowData)
 	windowData.path = windowData.path or "";
 	local window = Interface.openWindow(windowData.class, windowData.path);
-	window.setSize(windowData.width, windowData.height);
-	window.setPosition(windowData.xPos, windowData.yPos);
+	if window then
+		window.setSize(windowData.width, windowData.height);
+		window.setPosition(windowData.xPos, windowData.yPos);
+	end
 end
 
 -- ------------------------------------------------------------------------

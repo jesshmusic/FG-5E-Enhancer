@@ -7,7 +7,7 @@
 
 			function onHealthChanged()
 				local rActor = ActorManager.resolveActor(getDatabaseNode());
-				local nPercentWounded, sStatus, sColor = ColorManagerCustom.getHealthInfo(rActor);
+				local nPercentWounded, sStatus, sColor = ActorHealthManager.getHealthInfo(rActor);
 				curhp.setColor(sColor);
 				wounds.setColor(sColor);
 

@@ -7,7 +7,7 @@
 
 -- Horizontal health bar: Changed health bar to appear above token, full token width when health 100%, horizontal health bar, above token
 function drawHorizontalHealthBar(tokenCT, widgetHealthBar, bVisible)
-	local nPercentWounded, sStatus, sColor = ColorManagerCustom.getHealthInfo(CombatManager.getCTFromToken(tokenCT));
+	local nPercentWounded, sStatus, sColor = ActorHealthManager.getHealthInfo(CombatManager.getCTFromToken(tokenCT));
 
 	if widgetHealthBar then
 		widgetHealthBar.destroy();
@@ -129,7 +129,7 @@ end
 -- START larger healthdot section
 
 function drawLargerHealthDot(tokenCT, widgetHealthDot, bVisible)
-	local nPercentWounded, sStatus, sColor = ColorManagerCustom.getHealthInfo(CombatManager.getCTFromToken(tokenCT));
+	local nPercentWounded, sStatus, sColor = ActorHealthManager.getHealthInfo(CombatManager.getCTFromToken(tokenCT));
 
 	if widgetHealthDot then
 		widgetHealthDot.destroy();

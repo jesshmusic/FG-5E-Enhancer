@@ -49,8 +49,8 @@ end
 
 -- Draw save result bitmap widget on top of token
 function addSaveWidget(ctNode, sSuccess)
-	Debug.console('JH ctNode', ctNode);
-	Debug.console('JH tokenCT', CombatManager.getTokenFromCT(ctNode))
+	-- Debug.console('JH ctNode', ctNode);
+	-- Debug.console('JH tokenCT', CombatManager.getTokenFromCT(ctNode))
 	local tokenCT = CombatManager.getTokenFromCT(ctNode);
 	if tokenCT then
 		local saveIconName = '';

@@ -16,7 +16,6 @@
 	</properties>
 
 	<base>
-		<script name="ColorManagerCustom" file="scripts/manager_color_custom.lua" />
 
 		<!-- XML file containing new strings -->
 		<includefile source="strings/jesshmusic_Strings.xml" />

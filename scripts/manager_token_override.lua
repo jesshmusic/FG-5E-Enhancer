@@ -23,7 +23,7 @@ function updateHealthHelper(tokenCT, nodeCT)
       vWidget.destroy();
     end
   else
-    local nPercentWounded, sStatus, sColor = ColorManagerCustom.getHealthInfo(nodeCT);
+    local nPercentWounded, sStatus, sColor = ActorHealthManager.getHealthInfo(nodeCT);
 
     -- START Manage actor token condition widget if enabled
     if OptionsManager.getOption('CE_HCW') ~= "option_off" then

@@ -10,8 +10,8 @@ end
 
 function onHealthChanged()
 	local rActor = ActorManager.resolveActor(getDatabaseNode());
-	local nPercentWounded, sStatus, sColor = ColorManagerCustom.getHealthInfo(rActor);
-	Debug.console('JH onHealthChanged', rActor);
+	local nPercentWounded, sStatus, sColor = ActorHealthManager.getHealthInfo(rActor);
+	-- Debug.console('JH onHealthChanged', rActor);
 
 	if not wounds then
 		return;
@@ -25,7 +25,7 @@ end
 function updateHealthDisplay()
 	local sOption;
 
-	Debug.console('JH updateHealthDisplay', friendfoe, hptotal);
+	-- Debug.console('JH updateHealthDisplay', friendfoe, hptotal);
 
   if not hptotal then
 		return;
@@ -35,7 +35,7 @@ function updateHealthDisplay()
 		return;
 	end
 
-	Debug.console('JH updateHealthDisplay called for a ', friendfoe.getStringValue());
+	-- Debug.console('JH updateHealthDisplay called for a ', friendfoe.getStringValue());
 
 	if friendfoe.getStringValue() == "friend" then
 		sOption = OptionsManager.getOption("SHPC");
