@@ -16,6 +16,32 @@
 	</properties>
 
 	<base>
+		<script name="NoTokenRotate" file="scripts/no_token_rotate.lua" />
+
+		<!-- menu_item_register: Menu items 5E Enhancer -->
+		<string name="option_header_5eenhancer">5E Enhancer, Battle Map Settings</string>
+		<string name="option_actor_health_widget_conditions">Actor health widget conditions</string>
+		<string name="option_automatic_ranged_modifiers">Automatic ranged modifiers</string>
+		<string name="option_blood_on_tokens">Blood on tokens</string>
+		<string name="option_blood_pool">Blood pools on death</string>
+		<string name="option_height_font_size">Height font size</string>
+		<string name="option_horizontal_health_bars">Horizontal health bars</string>
+		<string name="option_larger_health_dots">Larger health dots</string>
+		<string name="option_show_reach_underlay">Show reach underlay</string>
+		<string name="option_show_faction_underlay">Show faction/space underlay</string>
+		<string name="option_skull_or_cross">Skull or cross on actor death</string>
+		<!-- <string name="option_stop_token_rotate">Stop token rotation</string> -->
+		<string name="option_token_remove_button_combo">Token deletion button combination</string>
+		<string name="option_height_font_size">Token height font size</string>
+		<string name="option_gm_underlay_show_ct_active_actor_underlay">Token underlay for CT active actor (DM only)</string>
+		<string name="option_gm_underlay_opacity">Token underlay opacity (DM only)</string>
+		<string name="option_gm_underlay_size">Token underlay size (DM only)</string>
+		<string name="option_flanking_rules">Use flanking rules (for medium sizes and smaller only)</string>
+		<string name="option_ranged_melee_modifier">Ranged in melee modifier (for medium sizes and smaller only)</string>
+		<!-- <string name="option_range_rules_used">Range rules to use</string>	 -->
+		<string name="option_token_rotation_with_alt">Lock token rotation to Alt + Mouse Wheel</string>
+		<string name="option_skip_non_initiatived_actor">Skip CT actors that haven't rolled intitiative</string>
+		<string name="option_saving_throw_graphics">Saving throw graphics</string>
 
 		<!-- XML file containing new strings -->
 		<includefile source="strings/jesshmusic_Strings.xml" />
@@ -75,6 +101,10 @@
 
 		<!-- Adds menu items for the extension -->
 		<script name="MenuItemRegister" file="scripts/menu_item_register.lua" />
+		<!-- token_height.lua: Manages height widgets and corresponding db entries for tokens. -->
+		<script name="TokenHeight" file="scripts/token_height.lua" />
+		<!-- token_wheel_manager.lua: Height manager for tokens -->
+		<script name="TokenWheelManager" file="scripts/token_wheel_manager.lua" />
 
 		<!-- token_save_graphics: overriding 5E Ruleset manager_action_save.lua functions to draw save result graphics on tokens, after saving throw has been thrown-->
 		<script name="TokenSaveGraphics" file="scripts/token_save_graphics.lua" />
@@ -88,6 +118,23 @@
 		<includefile source="spell_automation.xml" />
 
 		<script name="EffectManagerADND" file="scripts/manager_effect_adnd.lua" />
+
+		<!-- menu_item_register: Menu items for Interface Modifier 5E -->
+		<string name="option_header_5eenhancher_window_resizing">5E Enhancer, Window Resizing</string>
+		<string name="option_backgrounds">Backgrounds</string>
+		<string name="option_classes">Classes</string>
+		<string name="option_npc_powers">CT NPC powers</string>
+		<string name="option_feats">Feats</string>
+		<string name="option_items">Items</string>
+		<string name="option_notes">Notes</string>
+		<string name="option_npc">NPC</string>
+		<string name="option_races">Races</string>
+		<string name="option_pc_ability">PC abilities</string>
+		<string name="option_skills">Skills</string>
+		<string name="option_story">Story</string>
+		<string name="option_spells">Spells</string>
+		<string name="option_quests">Quests</string>
+
 		<includefile source="utility/template_utility_advanced.xml" />
 		<includefile source="utility/utility_effects_advanced.xml" />
 		<includefile source="advanced_effects.xml" />
