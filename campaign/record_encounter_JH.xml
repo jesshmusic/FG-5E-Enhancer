@@ -563,4 +563,11 @@
 		</button_text_sm>
 	</template>
 
+	<template name="image_record_step">
+		<imagecontrol name="image">
+			<indicators locked="image_locked" loading="image_loading" />
+			<default snap="on" drawingsize="500,500" />
+			<script file="campaign/scripts/image.lua" />
+		</imagecontrol>
+	</template>
 </root>

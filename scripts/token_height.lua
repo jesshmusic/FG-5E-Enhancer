@@ -23,23 +23,25 @@ function updateHeight(token, notches)
     if dbNode ~= nil then
         if dbNode.getValue() ~= nil then
             nHeight = tonumber(dbNode.getValue());
-        end    
+        end
     end
 
-    Debug.console("5E Enhancer: Recursive warning while updating height in DB known, has no effect on it working.")
+    --Debug.console("5E Enhancer: Recursive warning while updating height in DB known, has no effect on it working.")
 
     -- update height
     nHeight = nHeight + (5 * notches);
 
     -- manage CT DB entry
-    if nHeight ~= 0 then
+    --if nHeight ~= 0 then
         DB.setValue(ctNode, "height", "number", nHeight);
-    else
-        DB.deleteChild(ctNode, "height");
-    end
+    --else
+    --    DB.deleteChild(ctNode, "height");
+    --end
 
-    -- update text widget        
-    updateHeightWidget(token, nHeight);
+    -- update text widget
+    if token then
+        updateHeightWidget(token, nHeight);
+    end
 end
 
 function getFontName()
@@ -51,44 +53,57 @@ function getFontName()
         fontName = "height_small";
     elseif ( fontSize == 'option_medium' ) then
         fontName = "height_medium";
-    else         
-        fontName = "height_large"; 
+    else
+        fontName = "height_large";
     end
 
     return fontName;
 end
 
-function updateHeightWidget(token, nHeight)  
+function updateHeightWidget(token, nHeight)
     local widget = token.findWidget("tokenheight");
     if widget == nil then
         widget = token.addTextWidget( getFontName(), '' );
     end
-    widget.setName("tokenheight"); 
+    widget.setName("tokenheight");
     widget.setFrame('tempmodmini', 10, 10, 10, 4);
     widget.setPosition("bottom right", 0, 0);
     widget.setColor('#000000');
     widget.setText(nHeight .. ' ft.');
 
-    -- visibility    
+    -- visibility
     if nHeight == 0 or nHeight == nil then
         widget.setVisible(false);
         widget.destroy();
     else
-        widget.bringToFront();       
+        widget.bringToFront();
         widget.setVisible(true);
-    end        
+    end
 end
 
 function getTokenHeight(token)
     local nHeight = 0;
-    
+
     local ctNode = CombatManager.getCTFromToken(token);
     local dbNode = DB.getChild(ctNode, "height");
 
     if dbNode ~= nil then
         if dbNode.getValue() ~= nil then
             nHeight = tonumber(dbNode.getValue());
-        end    
+        end
+    end
+
+    return nHeight;
+end
+
+function getCTNodeHeight(ctNode)
+    local nHeight = 0;
+    local dbNode = DB.getChild(ctNode, "height");
+
+    if dbNode ~= nil then
+        if dbNode.getValue() ~= nil then
+            nHeight = tonumber(dbNode.getValue());
+        end
     end
 
     return nHeight;
@@ -97,7 +112,7 @@ end
 
 -- DEPRICATED (backup)
 function updateHeight_original(token, notches)
-    -- height text widget    
+    -- height text widget
     local nHeight = 0;
     local heightWidget = token.findWidget("tokenheight");
 
@@ -116,12 +131,12 @@ function updateHeight_original(token, notches)
         sHeight = sHeight:match(sPattern);
         nHeight = tonumber(sHeight);
 
-        nHeight = nHeight + (5 * notches); 
+        nHeight = nHeight + (5 * notches);
 
         heightWidget = updateHeightWidget(heightWidget, nHeight);
 
         -- Create height node in CT
-        local ctNode = CombatManager.getCTFromToken(token); 
+        local ctNode = CombatManager.getCTFromToken(token);
         local heightNode = ctNode.createChild("height","number");
         heightNode.setValue(nHeight);
 
@@ -131,17 +146,17 @@ function updateHeight_original(token, notches)
         if (dbNode ~= nil) and (nHeight == 0) then
             DB.deleteChild(ct, "height");
         end
-    end    
+    end
 end
 
 
 -- DEPRICATED (backup): return the integer of the tokens height
 function getTokenHeight_original(token)
     local nHeight = 0;
-    local heightWidget = token.findWidget("tokenheight"); 
-    
+    local heightWidget = token.findWidget("tokenheight");
+
     if (heightWidget == nil) then
-        return 0;        
+        return 0;
     elseif (heightWidget ~= nil) then
         -- regex pattern: ^[-]?[0-9]+   (returns - modifier and numbers at start of string, ex.: '-120 ft.' or '-120 ft', returns '-120')
         -- from the start of the string, zero or one of '-', then one or more of 0-9

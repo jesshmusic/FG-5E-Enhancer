@@ -2,6 +2,23 @@
 -- horizontal health bar calls
 -- token faction underlay drawing
 
+TOKEN_HEALTHBAR_GRAPHIC_WIDTH = 20;
+TOKEN_HEALTHBAR_GRAPHIC_HEIGHT = 200;
+
+TOKEN_HEALTHBAR_FGU_HOFFSET = 0;
+TOKEN_HEALTHBAR_FGU_WIDTH = 10;
+TOKEN_HEALTHBAR_FGU_HEIGHT = 100;
+TOKEN_HEALTHDOT_FGU_HOFFSET = 0;
+TOKEN_HEALTHDOT_FGU_VOFFSET = 0;
+TOKEN_HEALTHDOT_FGU_SIZE = 10;
+
+TOKEN_HEALTHBAR_FGC_VMIN = 14; -- Depends on graphic, and how much to show at zero health
+TOKEN_HEALTHBAR_FGC_VEXTEND = 5; -- Runover for health bar vertically
+TOKEN_HEALTHBAR_FGC_HOFFSET = -5; -- Offset for health bar horizontally (from right edge center)
+TOKEN_HEALTHDOT_FGC_HOFFSET = -5;
+TOKEN_HEALTHDOT_FGC_VOFFSET = -5;
+TOKEN_HEALTHDOT_FGC_SIZE = 20;
+
 function onInit()
   TokenManager.updateHealthHelper = updateHealthHelper;
   TokenManager.updateHealthBarScale = updateHealthBarScale;

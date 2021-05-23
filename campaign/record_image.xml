@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<root>
+  <windowclass name="imagewindow" merge="join">
+    <sheetdata>
+      <image_record name="image">
+        <script file="campaign/scripts/image_overrides.lua" />
+      </image_record>
+    </sheetdata>
+  </windowclass>
+</root>

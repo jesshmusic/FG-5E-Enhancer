@@ -17,6 +17,19 @@
 
 	<base>
 		<script name="NoTokenRotate" file="scripts/no_token_rotate.lua" />
+		<!-- automatic_range_modifier -->
+		<script name="RangedAttack" file="scripts/automatic_range_modifier/ranged_attacks.lua" />	<!-- Handles ranged attack modifiers -->
+		<script name="RangeFinder" file="scripts/automatic_range_modifier/range_finder.lua" />	<!-- Returns the distance between two tokens -->
+		<script name="ActionAttack" file="scripts/automatic_range_modifier/manager_action_attack.lua" />   <!-- Imported from 5e Ruleset, modified to hook into scripts handling range modifiers for ranged attacks -->
+
+		<!-- flanking -->
+		<script name="TokenHelper" file="scripts/flanking/token_helper.lua" />
+		<!-- Custom modifications and additions to the base extension -->
+		<script name="Flanking" file="scripts/flanking/flanking.lua" />			<!-- Custom script to automatically handle flanking rules -->
+
+		<!-- helper_functions.lua: Generic helper functions for the extension -->
+		<script name="Helper" file="scripts/helper_functions.lua" />
+		<script name="ChatHelper" file="scripts/chat_helper_functions.lua" />
 
 		<!-- menu_item_register: Menu items 5E Enhancer -->
 		<string name="option_header_5eenhancer">5E Enhancer, Battle Map Settings</string>
@@ -51,6 +64,9 @@
 
 		<!-- Join Character Main Sheet -->
 		<includefile source="campaign/record_char_main.xml" />
+
+		<!-- Join Character Main Sheet -->
+		<includefile source="campaign/record_image.xml" />
 
 		<!--updates the combat tracker to include the total HP for the host-->
 		<includefile source="ct/ct_host.xml" />

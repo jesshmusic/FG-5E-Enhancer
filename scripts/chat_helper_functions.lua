@@ -45,11 +45,11 @@ end
 
 -- changes the FM token underlay opacity to reflect selection in Settings menu
 function updateUnderlayOpacity()
-	local opacitySetting = OptionsManager.getOption("CE_UOP");
+	local opacitySetting = OptionsManager.getOption("CE_UOP")
 
 	-- if no setting is found, return the 20% opacity settubg as it's the default
 	if (opacitySetting == nil) or (opacitySetting == "") then
-		opacitySetting = "option_val_20";
+		opacitySetting = "option_val_20"
 	end
 
 	-- Underlay colors for tokens on the map. First two numbers/letters refer to the alpha channel or transparency levels.
@@ -64,23 +64,8 @@ function updateUnderlayOpacity()
 		["option_val_40"] = "66",
 		["option_val_30"] = "4D",
 		["option_val_20"] = "33",
-		["option_val_10"] = "1A",
-		["100"] = "FF",
-		["90"] = "E6",
-		["80"] = "CC",
-		["70"] = "B3",
-		["60"] = "99",
-		["50"] = "80",
-		["40"] = "66",
-		["30"] = "4D",
-		["20"] = "33",
-		["10"] = "1A"
+		["option_val_10"] = "1A"
 	}
-
-	-- replace alpha channel with new setting (first two characters)
-	TOKENUNDERLAYCOLOR_1 = hexAlphaTable[opacitySetting] .. string.sub(TOKENUNDERLAYCOLOR_1, 3);
-	TOKENUNDERLAYCOLOR_2 = hexAlphaTable[opacitySetting] .. string.sub(TOKENUNDERLAYCOLOR_2, 3);
-	TOKENUNDERLAYCOLOR_3 = hexAlphaTable[opacitySetting] .. string.sub(TOKENUNDERLAYCOLOR_3, 3);
 end
 
 -- pass in string and pattern to split by, returns a table
@@ -102,8 +87,8 @@ function split(string, splitLetter)
 	   cap = str:sub(last_end);
 	   table.insert(splitTable, cap);
 	end
-   ]]
-
+   ]] 
+   
    return splitTable;
 end
 
@@ -188,14 +173,14 @@ end
 -- ex.: CoreRPG, 5E, SavageWorlds
 function getRuleset ()
 	local ruleset = User.getRulesetName();
-
+	
 	return ruleset;
 end
 
 -- returns the text describing the size of the token, possible sizes: Tiny, Small, Medium, Large, Huge, Gargantuan
 function getActorSize(tokenCT)
-	local ctEntry = CombatManager.getCTFromToken(tokenCT);
-	local actor = ActorManager.getActorFromCT(ctEntry);
+	local ctEntry = CombatManager.getCTFromToken(tokenCT);	
+	local actor = ActorManager.getActorFromCT(ctEntry);	
 
 	local dbPath = DB.getPath(actor.sCreatureNode, 'size');
 	local sSize = DB.getText(dbPath);
@@ -210,15 +195,15 @@ function resizeForTokenSize(tokenCT, widget, scaling)
 	if (scaling == nil) then scaling = 1; end
     local baseSize = 80;
     local sSize = getActorSize(tokenCT);
-
+    
 	-- change size depending on token size description
 	if (sSize == 'Tiny') or (sSize == 'Small') then
-		widget.setSize(baseSize * 0.5 * scaling, baseSize * 0.5 * scaling);
-    elseif (sSize == 'Large') then
+		widget.setSize(baseSize * 1 * scaling, baseSize * 1 * scaling);
+    elseif (sSize == 'Large') then 
         widget.setSize(baseSize * 2 * scaling, baseSize * 2 * scaling);
-    elseif (sSize == 'Huge') then
+    elseif (sSize == 'Huge') then 
         widget.setSize(baseSize * 3 * scaling, baseSize * 3 * scaling);
-    elseif (sSize == 'Gargantuan') then
+    elseif (sSize == 'Gargantuan') then 
         widget.setSize(baseSize * 4 * scaling, baseSize * 4 * scaling);
     else
         widget.setSize(baseSize * scaling, baseSize * scaling);

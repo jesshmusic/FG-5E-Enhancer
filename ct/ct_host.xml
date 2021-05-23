@@ -66,7 +66,6 @@
 		</script>
 
 		<sheetdata merge="join">
-			<widget_ctentry_onmap name="map_widget" merge="add" insertbefore="isidentified"/>
 			<number_ct_crosslink name="wounds">
 				<script>
 					function onDoubleClick(x,y)
