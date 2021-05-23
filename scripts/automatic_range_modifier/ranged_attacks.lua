@@ -403,6 +403,9 @@ function getWeaponRanges5e(rActor, sRanged, sWeaponName)
   local medRange = 0; -- medium range
   local maxRange = 0; -- maximum range
 
+  Debug.console(rActor);
+  Debug.console('sRanged: ' .. sRanged);
+  Debug.console('sWeaponName: ' .. sWeaponName);
   if sRanged == 'R' then
     bRanged = true;
 
@@ -488,6 +491,7 @@ function getWeaponRanges5e(rActor, sRanged, sWeaponName)
       -- name: .name
       -- properties: .properties
       -- full example: charactersheet.id-00001.weaponlist.id-00001.name.properties
+      Debug.console('Character sType is ' .. rActor.sType);
 
       -- look through actions for match
       local nodeParent = rActor.sCreatureNode .. '.weaponlist';
@@ -498,6 +502,7 @@ function getWeaponRanges5e(rActor, sRanged, sWeaponName)
       for k, v in pairs(actionNodes) do
         local nodeChild = nodeParent .. '.' .. k;
         local nodeName = DB.getText(nodeChild .. '.name');
+        Debug.console('-- Weapon is ' .. nodeName);
 
         if (nodeName:lower() == sWeaponName:lower()) then
           local description = DB.getText(nodeChild .. '.properties');
@@ -505,6 +510,7 @@ function getWeaponRanges5e(rActor, sRanged, sWeaponName)
           -- search for 'range * ft', return range as substring, split substring in two (medium/max range)
           -- string input ex. 'Thrown (range 30/120)''  and 'range 30/120 ft.''
           local rangeText = string.match(description, "range%s%d*/%d*");
+          Debug.console('---Weapon(' .. nodeName .. ') found with description ' .. description);
 
           if rangeText ~= nil then
             -- find '/' index
@@ -513,6 +519,10 @@ function getWeaponRanges5e(rActor, sRanged, sWeaponName)
             local index = string.find(rangeText, '/');
             medRange = string.sub(rangeText, 7, index - 1);
             maxRange = string.sub(rangeText, index + 1, string.len(rangeText));
+          else
+            rangeText = string.match(description, "range%s%d*");
+            medRange = '120';
+            maxRange = string.sub(rangeText, 7, string.len(rangeText));
           end
         end
       end
