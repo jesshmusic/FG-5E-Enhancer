@@ -135,6 +135,9 @@
 
 		<script name="EffectManagerADND" file="scripts/manager_effect_adnd.lua" />
 
+		<!-- blood_pool.lua: on actor death, controls blood splatter placed under the token as another token -->
+		<script name="BloodPool" file="scripts/blood_pool.lua" />
+
 		<!-- menu_item_register: Menu items for Interface Modifier 5E -->
 		<string name="option_header_5eenhancher_window_resizing">5E Enhancer, Window Resizing</string>
 		<string name="option_backgrounds">Backgrounds</string>
