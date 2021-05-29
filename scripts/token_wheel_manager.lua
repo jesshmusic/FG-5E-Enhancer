@@ -3,7 +3,7 @@
 ]]--
 
 function onInit()
-  Token.onWheelHelper = onWheel;
+  Token.onWheel = onWheel;
 end
 
 

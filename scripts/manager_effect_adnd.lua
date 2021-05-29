@@ -33,17 +33,21 @@ function onInit()
   CombatManager.setCustomAddNPC(addNPC);
 
   --CoreRPG replacements
+  ActionsManager.decodeActorsRef = ActionsManager.decodeActors;
   ActionsManager.decodeActors = decodeActors;
 
   -- 5E effects replacements
+  EffectManager5E.checkConditionalHelperRef = EffectManager5E.checkConditionalHelper;
+  EffectManager5E.getEffectsByTypeRef = EffectManager5E.getEffectsByType;
+  EffectManager5E.hasEffectRef = EffectManager5E.hasEffect;
   EffectManager5E.checkConditionalHelper = checkConditionalHelper;
-  EffectManager5E.getEffectsByType = getEffectsByType;
+  --EffectManager5E.getEffectsByType = getEffectsByType;
   EffectManager5E.hasEffect = hasEffect;
 
-  -- used for AD&D Core ONLY
-  --EffectManager5E.evalAbilityHelper = evalAbilityHelper;
-
   -- used for 5E extension ONLY
+  ActionAttack.performRollRef = ActionAttack.performRoll;
+  ActionDamage.performRollRef = ActionDamage.performRoll;
+  PowerManager.performActionRef = PowerManager.performAction;
   ActionAttack.performRoll = manager_action_attack_performRoll;
   ActionDamage.performRoll = manager_action_damage_performRoll;
   PowerManager.performAction = manager_power_performAction;
@@ -597,76 +601,13 @@ end
 --          REPLACEMENT FUNCTIONS
 --
 
-
-
--- replace 5E EffectManager5E manager_effect_5E.lua evalAbilityHelper() with this
--- AD&D CORE ONLY
-function evalAbilityHelper(rActor, sEffectAbility)
-	-- local sSign, sModifier, sShortAbility = sEffectAbility:match("^%[([%+%-]?)([H2]?)([A-Z][A-Z][A-Z])%]$");
-
-	-- local nAbility = nil;
-	-- if sShortAbility == "STR" then
-		-- nAbility = ActorManager5E.getAbilityBonus(rActor, "strength");
-	-- elseif sShortAbility == "DEX" then
-		-- nAbility = ActorManager5E.getAbilityBonus(rActor, "dexterity");
-	-- elseif sShortAbility == "CON" then
-		-- nAbility = ActorManager5E.getAbilityBonus(rActor, "constitution");
-	-- elseif sShortAbility == "INT" then
-		-- nAbility = ActorManager5E.getAbilityBonus(rActor, "intelligence");
-	-- elseif sShortAbility == "WIS" then
-		-- nAbility = ActorManager5E.getAbilityBonus(rActor, "wisdom");
-	-- elseif sShortAbility == "CHA" then
-		-- nAbility = ActorManager5E.getAbilityBonus(rActor, "charisma");
-	-- elseif sShortAbility == "LVL" then
-		-- nAbility = ActorManager5E.getAbilityBonus(rActor, "level");
-	-- elseif sShortAbility == "PRF" then
-		-- nAbility = ActorManager5E.getAbilityBonus(rActor, "prf");
-	-- end
-
-	-- if nAbility then
-		-- if sSign == "-" then
-			-- nAbility = 0 - nAbility;
-		-- end
-		-- if sModifier == "H" then
-			-- if nAbility > 0 then
-				-- nAbility = math.floor(nAbility / 2);
-			-- else
-				-- nAbility = math.ceil(nAbility / 2);
-			-- end
-		-- elseif sModifier == "2" then
-			-- nAbility = nAbility * 2;
-		-- end
-	-- end
-
-	-- return nAbility;
-    return 0;
-end
-
 -- replace CoreRPG ActionsManager manager_actions.lua decodeActors() with this
 function decodeActors(draginfo)
-	local rSource = nil;
-	local aTargets = {};
-
-
-	for k,v in ipairs(draginfo.getShortcutList()) do
-		if k == 1 then
-			rSource = ActorManager.getActor(v.class, v.recordname);
-		else
-			local rTarget = ActorManager.getActor(v.class, v.recordname);
-			if rTarget then
-				table.insert(aTargets, rTarget);
-			end
-		end
-	end
-
-    -- itemPath data filled if itemPath if exists
-    local sItemPath = draginfo.getMetaData("itemPath");
-    if (sItemPath and sItemPath ~= "") then
-        rSource.itemPath = sItemPath;
-    end
-    --
-
-	return rSource, aTargets;
+  local sItemPath = draginfo.getMetaData("itemPath");
+  if (sItemPath and sItemPath ~= "") then
+      rSource.itemPath = sItemPath;
+  end
+	return ActionsManager.decodeActorsRef(draginfo);
 end
 
 -- replace 5E EffectManager5E manager_effect_5E.lua getEffectsByType() with this
@@ -690,9 +631,6 @@ function getEffectsByType(rActor, sEffectType, aFilter, rFilterActor, bTargetedO
 			end
 		end
 	end
-
-	-- Determine effect type targeting
-	local bTargetSupport = StringManager.isWord(sEffectType, DataCommon.targetableeffectcomps);
 
 	-- Iterate through effects
 	for _,v in pairs(DB.getChildren(ActorManager.getCTNode(rActor), "effects")) do
@@ -844,7 +782,7 @@ function hasEffect(rActor, sEffect, rTarget, bTargetedOnly, bIgnoreEffectTargets
 	local aMatch = {};
 	for _,v in pairs(DB.getChildren(ActorManager.getCTNode(rActor), "effects")) do
 		local nActive = DB.getValue(v, "isactive", 0);
-        if (EffectManagerADND.isValidCheckEffect(rActor,v)) then
+    if (EffectManagerADND.isValidCheckEffect(rActor,v)) then
 			-- Parse each effect label
 			local sLabel = DB.getValue(v, "label", "");
 			local bTargeted = EffectManager.isTargetedEffect(v);
@@ -911,8 +849,6 @@ function checkConditionalHelper(rActor, sEffect, rTarget, aIgnore)
 		return false;
 	end
 
-	local bReturn = false;
-
 	for _,v in pairs(DB.getChildren(ActorManager.getCTNode(rActor), "effects")) do
 		local nActive = DB.getValue(v, "isactive", 0);
     if (EffectManagerADND.isValidCheckEffect(rActor,v) and not StringManager.contains(aIgnore, v.getNodeName())) then
@@ -922,8 +858,7 @@ function checkConditionalHelper(rActor, sEffect, rTarget, aIgnore)
 			local aEffectComps = EffectManager.parseEffect(sLabel);
 
 			-- Iterate through each effect component looking for a type match
-			local nMatch = 0;
-			for kEffectComp, sEffectComp in ipairs(aEffectComps) do
+			for _, sEffectComp in ipairs(aEffectComps) do
 				local rEffectComp = EffectManager5E.parseEffectComp(sEffectComp);
 				-- CHECK FOR FOLLOWON EFFECT TAGS, AND IGNORE THE REST
 				if rEffectComp.type == "AFTER" or rEffectComp.type == "FAIL" then
@@ -946,41 +881,35 @@ function checkConditionalHelper(rActor, sEffect, rTarget, aIgnore)
 				elseif rEffectComp.original:lower() == sEffect then
 					if bTargeted then
 						if EffectManager.isEffectTarget(v, rTarget) then
-							bReturn = true;
-						end
-					else
-						bReturn = true;
+              return true;
+            end
+          else
+            return true;
 					end
 				end
 			end
 		end
 	end
 
-	return bReturn;
+	return false;
 end
 
 -- replace 5E ActionDamage manager_action_damage.lua performRoll() with this
 -- extension only
 function manager_action_damage_performRoll(draginfo, rActor, rAction)
-	local rRoll = ActionDamage.getRoll(rActor, rAction);
-
-    if (draginfo and rActor.itemPath and rActor.itemPath ~= "") then
-        draginfo.setMetaData("itemPath",rActor.itemPath);
-    end
-
-	ActionsManager.performAction(draginfo, rActor, rRoll);
+  if (draginfo and rActor.itemPath and rActor.itemPath ~= "") then
+      draginfo.setMetaData("itemPath",rActor.itemPath);
+  end
+  ActionDamage.performRollRef(draginfo, rActor, rAction);
 end
 
 -- replace 5E ActionAttack manager_action_attack.lua performRoll() with this
 -- extension only
 function manager_action_attack_performRoll(draginfo, rActor, rAction)
-	local rRoll = ActionAttack.getRoll(rActor, rAction);
-
-    if (draginfo and rActor.itemPath and rActor.itemPath ~= "") then
-        draginfo.setMetaData("itemPath",rActor.itemPath);
-    end
-
-	ActionsManager.performAction(draginfo, rActor, rRoll);
+  if (draginfo and rActor.itemPath and rActor.itemPath ~= "") then
+      draginfo.setMetaData("itemPath",rActor.itemPath);
+  end
+  ActionAttack.performRollRef(draginfo, rActor, rAction);
 end
 
 
@@ -991,52 +920,14 @@ function manager_power_performAction(draginfo, rActor, rAction, nodePower)
 		return false;
 	end
 
-    -- add itemPath to rActor so that when effects are checked we can
-    -- make compare against action only effects
-    local nodeWeapon = nodePower.getChild("...");
-    local _, sRecord = DB.getValue(nodeWeapon, "shortcut", "", "");
+  -- add itemPath to rActor so that when effects are checked we can
+  -- make compare against action only effects
+  local nodeWeapon = nodePower.getChild("...");
+  local _, sRecord = DB.getValue(nodeWeapon, "shortcut", "", "");
 	rActor.itemPath = sRecord;
-    if (draginfo and rActor.itemPath and rActor.itemPath ~= "") then
-        draginfo.setMetaData("itemPath",rActor.itemPath);
-    end
-    --
+  if (draginfo and rActor.itemPath and rActor.itemPath ~= "") then
+    draginfo.setMetaData("itemPath",rActor.itemPath);
+  end
 
-	PowerManager.evalAction(rActor, nodePower, rAction);
-
-	local rRolls = {};
-	if rAction.type == "cast" then
-		rAction.subtype = (rAction.subtype or "");
-		if rAction.subtype == "" then
-			table.insert(rRolls, ActionPower.getPowerCastRoll(rActor, rAction));
-		end
-		if ((rAction.subtype == "") or (rAction.subtype == "atk")) and rAction.range then
-			table.insert(rRolls, ActionAttack.getRoll(rActor, rAction));
-		end
-		if ((rAction.subtype == "") or (rAction.subtype == "save")) and ((rAction.save or "") ~= "") then
-			table.insert(rRolls, ActionPower.getSaveVsRoll(rActor, rAction));
-		end
-
-	elseif rAction.type == "attack" then
-		table.insert(rRolls, ActionAttack.getRoll(rActor, rAction));
-
-	elseif rAction.type == "powersave" then
-		table.insert(rRolls, ActionPower.getSaveVsRoll(rActor, rAction));
-
-	elseif rAction.type == "damage" then
-		table.insert(rRolls, ActionDamage.getRoll(rActor, rAction));
-
-	elseif rAction.type == "heal" then
-		table.insert(rRolls, ActionHeal.getRoll(rActor, rAction));
-
-	elseif rAction.type == "effect" then
-		local rRoll = ActionEffect.getRoll(draginfo, rActor, rAction);
-		if rRoll then
-			table.insert(rRolls, rRoll);
-		end
-	end
-
-	if #rRolls > 0 then
-		ActionsManager.performMultiAction(draginfo, rActor, rRolls[1].sType, rRolls);
-	end
-	return true;
+  return PowerManager.performActionRef(draginfo, rActor, rAction, nodePower);
 end

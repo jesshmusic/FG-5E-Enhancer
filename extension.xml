@@ -20,7 +20,7 @@
 		<!-- automatic_range_modifier -->
 		<script name="RangedAttack" file="scripts/automatic_range_modifier/ranged_attacks.lua" />	<!-- Handles ranged attack modifiers -->
 		<script name="RangeFinder" file="scripts/automatic_range_modifier/range_finder.lua" />	<!-- Returns the distance between two tokens -->
-		<script name="ActionAttack" file="scripts/automatic_range_modifier/manager_action_attack.lua" />   <!-- Imported from 5e Ruleset, modified to hook into scripts handling range modifiers for ranged attacks -->
+		<script name="CustomActionAttack" file="scripts/automatic_range_modifier/manager_action_attack.lua" />   <!-- Imported from 5e Ruleset, modified to hook into scripts handling range modifiers for ranged attacks -->
 
 		<!-- flanking -->
 		<script name="TokenHelper" file="scripts/flanking/token_helper.lua" />
@@ -137,22 +137,6 @@
 
 		<!-- blood_pool.lua: on actor death, controls blood splatter placed under the token as another token -->
 		<script name="BloodPool" file="scripts/blood_pool.lua" />
-
-		<!-- menu_item_register: Menu items for Interface Modifier 5E -->
-		<string name="option_header_5eenhancher_window_resizing">5E Enhancer, Window Resizing</string>
-		<string name="option_backgrounds">Backgrounds</string>
-		<string name="option_classes">Classes</string>
-		<string name="option_npc_powers">CT NPC powers</string>
-		<string name="option_feats">Feats</string>
-		<string name="option_items">Items</string>
-		<string name="option_notes">Notes</string>
-		<string name="option_npc">NPC</string>
-		<string name="option_races">Races</string>
-		<string name="option_pc_ability">PC abilities</string>
-		<string name="option_skills">Skills</string>
-		<string name="option_story">Story</string>
-		<string name="option_spells">Spells</string>
-		<string name="option_quests">Quests</string>
 
 		<includefile source="utility/template_utility_advanced.xml" />
 		<includefile source="utility/utility_effects_advanced.xml" />

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- 
-  Please see the license.html file included with this distribution for 
+<!--
+  Please see the license.html file included with this distribution for
   attribution and copyright information.
 -->
 
 <root>
-    
+
 	<windowclass name="char_weapon" merge="join">
-		<script file="campaign/scripts/char_weapon_adnd.lua" merge="replace" />
+		<script file="campaign/scripts/char_weapon_adnd.lua" merge="join" />
   </windowclass>
 
 	<windowclass name="item_main" merge="join">
@@ -27,7 +27,7 @@
             <!-- end advanced effects entry -->
         </sheetdata>
 	</windowclass>
-    
+
     <!-- advanced effects subwindow -->
     <windowclass name="advanced_effects_subwindow">
 		<margins control="0,0,2,2" />
@@ -38,12 +38,12 @@
                 local bPCEdit = OptionsManager.isOption("ADND_AE_EDIT", "enabled");
                 local bIsPcItem = string.match(node.getPath(),"^charsheet") ~= null;
                 local bCanEdit = false;
-                
-                if (bIsPcItem and bIDentified and bPCEdit) or 
+
+                if (bIsPcItem and bIDentified and bPCEdit) or
                     (bIsPcItem and bPCEdit) then
                     bCanEdit = true;
                 end
-                
+
                 if (User.isHost() or bCanEdit) then
                     header_effects.setVisible(true);
                     effects_iedit.setVisible(true);
@@ -69,7 +69,7 @@
  				<script>
 					function onValueChanged()
 						local bEditMode = (getValue() == 1);
-						
+
 						window.effects_list_iadd.setVisible(bEditMode);
 						window.effects_list.update();
 					end
@@ -79,14 +79,14 @@
 				<anchored to="effects_iedit" position="lefthigh" offset="5,0" />
 				<target>effects_list</target>
 			</button_iadd>
-            
+
 			<list_editor_advanced_effects name="effects_list">
 				<datasource>.effectlist</datasource>
 				<class>advanced_effects_entry</class>
 				<script>
 					function addEntry(bFocus)
 						local n = getWindowCount();
-						
+
 						local w = createWindow();
 						return w;
 					end
@@ -95,7 +95,7 @@
             <!-- end advanced effects entry -->
 		</sheetdata>
     </windowclass>
-    
+
 	<windowclass name="npc_combat" merge="join">
 		<sheetdata>
             <!-- effects -->
@@ -113,7 +113,7 @@
             <!-- end effects -->
 		</sheetdata>
 	</windowclass>
-    
+
 	<windowclass name="charsheet_abilities_contents" merge="join" insertafter="languagestitle">
 		<sheetdata>
             <!-- effects -->
@@ -134,7 +134,7 @@
  				<script>
 					function onValueChanged()
 						local bEditMode = (getValue() == 1);
-						
+
 						window.effects_list_iadd.setVisible(bEditMode);
 						window.effects_list.update();
 					end
@@ -144,7 +144,7 @@
 				<anchored to="effects_iedit" position="lefthigh" offset="5,0" />
 				<target>effects_list</target>
 			</button_iadd>
-            
+
 			<list_editor_advanced_effects name="effects_list">
                 <anchored>
                     <top parent="advancedeffectstitle" anchor="bottom" relation="relative" offset="0" />
@@ -156,7 +156,7 @@
 				<script>
 					function addEntry(bFocus)
 						local n = getWindowCount();
-						
+
 						local w = createWindow();
 						return w;
 					end
@@ -165,5 +165,5 @@
             <!-- end advanced effects entry -->
 		</sheetdata>
 	</windowclass>
-    
+
 </root>
