@@ -50,25 +50,25 @@ function updateHealthBarScale(tokenCT, nPercentWounded)
 		-- Horizontal health bar, (left, default)
 		if OptionsManager.getOption('CE_HHB') == "option_v1" then
 			widgetHealthBar.setSize(wScaled, 10, "left");
-			widgetHealthBar.setPosition("top left", getLeftPositioning(tokenCT, nPercentWounded), -20);
+			widgetHealthBar.setPosition("top left", getLeftPositioning(tokenCT, nPercentWounded), 10);
 		end
 
 		-- Horizontal health bar, (left, taller)
 		if OptionsManager.getOption('CE_HHB') == "option_v2" then
 			widgetHealthBar.setSize(wScaled, 20);
-			widgetHealthBar.setPosition("top left", getLeftPositioning(tokenCT, nPercentWounded), -25);
+			widgetHealthBar.setPosition("top left", getLeftPositioning(tokenCT, nPercentWounded), 15);
 		end
 
 		-- Horizontal health bar, (centered, default)
 		if OptionsManager.getOption('CE_HHB') == "option_v3" then
 			widgetHealthBar.setSize(wScaled, 10);
-			widgetHealthBar.setPosition("top center", 0, -10 );
+			widgetHealthBar.setPosition("top center", 0, 10 );
 		end
 
 		-- Horizontal health bar, (centered, taller)
 		if OptionsManager.getOption('CE_HHB') == "option_v4" then
 			widgetHealthBar.setSize(wScaled, 20);
-			widgetHealthBar.setPosition("top center", 0, - 15 );
+			widgetHealthBar.setPosition("top center", 0, 15 );
 		end
 
 	-- else

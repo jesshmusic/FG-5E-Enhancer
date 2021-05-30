@@ -1,11 +1,11 @@
 --[[
-    Script to add blood pools/splatter under tokens on actor death.					
+    Script to add blood pools/splatter under tokens on actor death.
 ]]--
 
 function addBloodPool(tokenCT)
-    -- Debug.chat('blood pool called', tokenCT)
+     Debug.chat('blood pool called', tokenCT)
 
-    local randomImage = math.random(10); -- return 1-10    
+    local randomImage = math.random(10); -- return 1-10
     local bloodPoolName = 'blood_pool_' .. randomImage;
 
     -- as token
@@ -36,18 +36,18 @@ function addBloodPool(tokenCT)
         bloodToken.setSize(tokenWidth * tokenImageScale, tokenHeight * tokenImageScale);
 
         -- randomize token orientation
-        local rotation = math.random(360); -- math.random(360) returns a number between 1 and 360    
+        local rotation = math.random(360); -- math.random(360) returns a number between 1 and 360
         bloodToken.setOrientation(rotation);
     end
 
     -- as widget
     local bloodPool = tokenCT.addBitmapWidget(bloodPoolName);
-    bloodPool.setName("blood_pool");	
+    bloodPool.setName("blood_pool");
     bloodPool.setPosition("center");
     bloodPool.sendToBack();
     local randomScaling = math.random() + 1;  -- math.random() returns number between 0 and 1
     Helper.resizeForTokenSize(tokenCT, bloodPool, randomScaling);
-    local rotation = math.random(360); -- math.random(360) returns a number between 1 and 360   
+    local rotation = math.random(360); -- math.random(360) returns a number between 1 and 360
     --image.rotate(rotation);
     bloodPool.setVisible(true);
 end

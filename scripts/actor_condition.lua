@@ -5,6 +5,7 @@
 function updateHealthCondition(tokenCT, nPercentWounded, sStatus)
     -- remove/clear current condition or blood pool widgets if any
     local widgetActorCondition = tokenCT.findWidget("actor_condition");
+
     if widgetActorCondition then
         widgetActorCondition.destroy();
     end
@@ -27,13 +28,19 @@ function updateHealthCondition(tokenCT, nPercentWounded, sStatus)
 
             local ctNode = CombatManager.getCTFromToken(tokenCT);
             local sClass, sRecord = DB.getValue(ctNode, "link", "", "");
-            -- Debug.chat('db entries', sClass, sRecord);
+
             if (sClass == 'charsheet') then
               widgetActorCondition = tokenCT.addBitmapWidget("health_dying");
             elseif ( OptionsManager.getOption('CE_SC') == "option_skull" ) then
                 widgetActorCondition = tokenCT.addBitmapWidget("health_dead");
             elseif ( OptionsManager.getOption('CE_SC') == "option_cross" ) then
                 widgetActorCondition = tokenCT.addBitmapWidget("health_dead_cross");
+            end
+
+            if (sClass == 'npc') then
+                if ( OptionsManager.getOption('CE_BP') == "on" and widgetBloodPool == nil) then
+                    BloodPool.addBloodPool(tokenCT);
+                end
             end
         end
     elseif (sStatus == 'Dead') then
