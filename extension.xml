@@ -105,9 +105,6 @@
 		<includefile source="graphics/graphics_fonts.xml" />
     <script name="CustomSlashCommands" file="scripts/custom_slash_commands.lua" />
 
-		<!-- 5E Enhancer Icon -->
-		<includefile source="spell_automation.xml" />
-
 		<!-- blood_pool.lua: on actor death, controls blood splatter placed under the token as another token -->
 		<script name="BloodPool" file="scripts/blood_pool.lua" />
 	</base>
