@@ -1,5 +1,20 @@
 function onInit()
 	CombatManager.setCustomTurnStart(onTurnStart);
+
+	if ActionAttackBSA then
+		resolveActionHandler = ActionsManager.resolveAction;
+		resolveActionOld = ActionAttackBSA.customResolveAction;
+		ActionAttackBSA.customResolveAction = resolveActionOverride;
+	end
+end
+
+function resolveActionOverride(rSource, rTarget, rRoll)
+	if rRoll.sType == "attack" then
+		ActionAttackBSA.addToOnAttack(rSource, rTarget, rRoll);
+	end
+	if resolveActionHandler then
+		resolveActionHandler(rSource, rTarget, rRoll);
+	end
 end
 
 function onTurnStart(nodeEntry)
