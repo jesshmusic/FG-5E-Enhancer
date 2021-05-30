@@ -5,84 +5,29 @@
 
 	<string name="option_header_5eenhancer">Greyhawk Settings</string>
 	<string name="option_actor_health_widget_conditions">Actor health widget conditions</string>
+	<string name="option_automatic_ranged_modifiers">Automatic ranged modifiers</string>
 	<string name="option_blood_on_tokens">Blood on tokens</string>
+	<string name="option_blood_pool">Blood pools on death</string>
+	<string name="option_height_font_size">Height font size</string>
 	<string name="option_horizontal_health_bars">Horizontal health bars</string>
 	<string name="option_larger_health_dots">Larger health dots</string>
+	<string name="option_show_reach_underlay">Show reach underlay</string>
+	<string name="option_show_faction_underlay">Show faction/space underlay</string>
 	<string name="option_skull_or_cross">Skull or cross on actor death</string>
+	<!-- <string name="option_stop_token_rotate">Stop token rotation</string> -->
+	<string name="option_token_remove_button_combo">Token deletion button combination</string>
+	<string name="option_height_font_size">Token height font size</string>
+	<string name="option_gm_underlay_show_ct_active_actor_underlay">Token underlay for CT active actor (DM only)</string>
+	<string name="option_gm_underlay_opacity">Token underlay opacity (DM only)</string>
+	<string name="option_gm_underlay_size">Token underlay size (DM only)</string>
+	<string name="option_flanking_rules">Use flanking rules (for medium sizes and smaller only)</string>
+	<string name="option_ranged_melee_modifier">Ranged in melee modifier (for medium sizes and smaller only)</string>
+	<!-- <string name="option_range_rules_used">Range rules to use</string>	 -->
 	<string name="option_token_rotation_with_alt">Lock token rotation to Alt + Mouse Wheel</string>
+	<string name="option_skip_non_initiatived_actor">Skip CT actors that haven't rolled intitiative</string>
 	<string name="option_saving_throw_graphics">Saving throw graphics</string>
 
-	<string name="header_effects">Effect Features</string>
-	<string name="item_label_effectfeature">Effect</string>
-	<string name="item_label_effect_visible">Visibility</string>
-	<string name="item_label_effect_visible_tooltip">Always SHOW or HIDE the effect. Default mode shows if item is identified or hides if not.</string>
-	<string name="item_label_effects_hide">Hide</string>
-	<string name="item_label_effects_show">Show</string>
-
-	<string name="item_label_effects_dice">Dice</string>
-	<string name="item_effects_dice_tooltip">Dice rolled for duration of effect.</string>
-	<string name="item_label_effects_mod_tooltip">Modifier applied to duration or do not use dice and set for static duration.</string>
-	<string name="item_label_effects_unit">Unit</string>
-	<string name="item_label_effects_unit_tooltip">Time unit, round, minute, hour or day.</string>
-	<string name="item_label_effects_string_tooltip">Effect string. i.e. "STR: +1;SAVE -1;"</string>
-	<string name="item_label_effect_tooltip">Effects that are applied with the item is equipped and the character is in the combat tracker.</string>
-
-	<string name="item_label_effectfeature">Effect</string>
-	<string name="item_label_ability_type">Type</string>
-	<string name="item_ability_type_tooltip">MODIFIER, PERCENT MODIFIER, BASE VALUE or BASE PERCENT value of an ability score.</string>
-	<string name="item_label_ability_name">Ability</string>
-	<string name="item_label_ability_value">Value</string>
-
-	<string name="effect_label_misc_type_tooltip">The type of effect you wish to apply.</string>
-	<string name="effect_label_misc_value_tooltip">Value to be applied to the type of effect.</string>
-
-	<string name="power_label_type">Type</string>
-	<string name="power_label_type_tooltip">Type of effect. Use CUSTOM to set the string manually.</string>
-
-	<string name="char_abilities_label_advancedeffects">ADVANCED EFFECTS</string>
-
-	<string name="header_saves">Save Features</string>
-	<string name="item_save_type_tooltip">Modifier of a save score. Base value of a save score.</string>
-	<string name="item_label_save_type">Type</string>
-	<string name="item_label_save_type_tooltip">The type of save to be used.</string>
-	<string name="item_label_save_name">Save</string>
-	<string name="item_label_save_name_tooltip">Save</string>
-	<string name="item_label_save_value">Value</string>
-	<string name="item_label_save_value_tooltip">Value of the modifier.</string>
-	<string name="item_label_savefeature">Feature</string>
-	<string name="item_label_effect_attackonly">ActionOnly</string>
-	<string name="item_label_effect_attackonly_tooltip">Check this so effect ONLY applied during an attack or damage.</string>
-
-	<string name="text_MOD">MOD</string>
-	<string name="custom">Custom</string>
-	<string name="save">Save</string>
-	<string name="ability">Ability</string>
-	<string name="resist">Resistance</string>
-	<string name="resistant">Resistant</string>
-	<string name="immune">Immunity</string>
-	<string name="vuln">Vulnerability</string>
-	<string name="susceptiblity">Susceptiblity</string>
-	<string name="misc">Miscellaneous</string>
-
-	<string name="modifier">Modifier</string>
-	<string name="percent_modifier">% Modifier</string>
-	<string name="base">Base</string>
-	<string name="base_percent">Base %</string>
-
-	<string name="ac">AC</string>
-	<string name="bac">Base AC</string>
-	<string name="atk">Attack</string>
-	<string name="check">Check</string>
-	<string name="dmg">Damage</string>
-	<string name="heal">Heal</string>
-	<string name="init_ae">Initiative</string>
-	<string name="save">Save</string>
-
-	<string name="option_label_ADND_AE_EDIT">PC: Adv. Effect Edit</string>
-	<string name="option_label_ADND_AE_enabled">Enabled</string>
-	<string name="option_label_ADND_AE_disabled">Disabled</string>
-
 	<string name="readycheck_window_title">Ready Check</string>
-	<string name="readycheck_button_label">I AM READY!</string>
-	<string name="readycheck_button_label_tooltip">The DM has asked if you are ready, are you?</string>
+	<string name="readycheck_button_label">Yes, of course I AM ready...</string>
+	<string name="readycheck_button_label_tooltip">The check of readiness is NOW in effect... yay or nay?</string>
 </root>
