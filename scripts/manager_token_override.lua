@@ -26,7 +26,6 @@ function updateHealthHelper(tokenCT, nodeCT)
 
     -- START Manage actor token condition widget if enabled
     if OptionsManager.getOption('CE_HCW') ~= "option_off" then
-      Debug.chat(sStatus);
       ActorCondition.updateHealthCondition(tokenCT, nPercentWounded, sStatus);
     end
     -- END Manage actor token condition widget if enabled
@@ -41,6 +40,8 @@ function updateHealthHelper(tokenCT, nodeCT)
           HealthGraphicUpdater.drawHorizontalHealthBar(tokenCT, widgetHealthBar, sOptTH == "bar")
         end
         -- END Draw horizontal health bar if menu option set
+      else
+        TokenManager.updateHealthHelperRef(tokenCT, nodeCT);
       end
     else
       TokenManager.updateHealthHelperRef(tokenCT, nodeCT);

@@ -193,7 +193,6 @@ end
 -- get the CT Height entry if it exists
 function getCTEntryHeight(ctEntry)
 	if ctEntry then
-		Debug.chat(ctEntry);
 		local heightNode = ctEntry.getChild('height');
 		if heightNode then
 			return heightNode.getValue();

@@ -3,8 +3,6 @@
 ]]--
 
 function addBloodPool(tokenCT)
-     Debug.chat('blood pool called', tokenCT)
-
     local randomImage = math.random(10); -- return 1-10
     local bloodPoolName = 'blood_pool_' .. randomImage;
 
