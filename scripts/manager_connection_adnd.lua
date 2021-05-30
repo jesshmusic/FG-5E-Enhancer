@@ -1,16 +1,12 @@
 --
---
 -- Register bits for connections
---
---
---
 
 function onInit()
   if User.isHost() then
-      User.onLogin = onLoginManagement;
-      local nodeUsers = DB.createNode("connectedlist");
-      -- we're just starting, remove all entries, no one is connected
-      nodeUsers.delete();
+    User.onLogin = onLoginManagement;
+    local nodeUsers = DB.createNode("connectedlist");
+    -- we're just starting, remove all entries, no one is connected
+    nodeUsers.delete();
   end
 end
 

@@ -23,7 +23,7 @@
 		<script name="CustomActionAttack" file="scripts/automatic_range_modifier/manager_action_attack.lua" />   <!-- Imported from 5e Ruleset, modified to hook into scripts handling range modifiers for ranged attacks -->
 
 		<!-- flanking -->
-		<script name="TokenHelper" file="scripts/flanking/token_helper.lua" />
+		<script name="TokenHelper" file="scripts/token_helper.lua" />
 		<!-- Custom modifications and additions to the base extension -->
 		<script name="Flanking" file="scripts/flanking/flanking.lua" />			<!-- Custom script to automatically handle flanking rules -->
 
