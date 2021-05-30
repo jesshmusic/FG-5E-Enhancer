@@ -122,6 +122,5 @@ function isFlanking(rActor, rTarget)
 	end
 
 	if bOutOfRange == true then bFlanking = false; end
-	Debug.chat('is flanking?', bFlanking);
 	return bFlanking;
 end

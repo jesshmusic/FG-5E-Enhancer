@@ -58,9 +58,22 @@ function onInit()
 
   actionRoll_old = ActionsManager.actionRoll
   ActionsManager.actionRoll = actionRoll_override
+
+  if ActionAttackBSA then
+    resolveActionHandler = ActionsManager.resolveAction;
+    resolveActionOld = ActionAttackBSA.customResolveAction;
+    ActionAttackBSA.customResolveAction = resolveActionOverride;
+  end
 end
 
-
+function resolveActionOverride(rSource, rTarget, rRoll)
+  if rRoll.sType == "attack" then
+    ActionAttackBSA.addToOnAttack(rSource, rTarget, rRoll);
+  end
+  if resolveActionHandler then
+    resolveActionHandler(rSource, rTarget, rRoll);
+  end
+end
 
 function registerOptions_Spell_Automation()
   OptionsManager.registerOption2("SA_DEF_ACT", true, "option_header_client", "option_label_Default_Actions", "option_entry_cycler",
