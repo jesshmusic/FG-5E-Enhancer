@@ -6,8 +6,6 @@
 -->
 
 <root>
-	<!-- Extension additions START -->
-
 
 	<icon name="hpCurrentIcon">graphics/icons/logo.png</icon>
 	<!-- Tokens - Horizontal Health Bar -->
@@ -61,6 +59,15 @@
 
 	<icon name="chat_success" file="graphics/icons/check_success.png" />
 	<icon name="chat_fail" file="graphics/icons/check_fail.png" />
+	<icon name="addcombat" file="graphics/buttons/addcombat.png" />
+	<icon name="addtomap" file="graphics/buttons/addtomap.png" />
+	<icon name="addparty" file="graphics/buttons/addparty.png" />
+	<icon name="awardxp" file="graphics/buttons/awardxp.png" />
+	<icon name="addcombatdown" file="graphics/buttons/addcombatdown.png" />
+	<icon name="addtomapdown" file="graphics/buttons/addtomapdown.png" />
+	<icon name="addpartydown" file="graphics/buttons/addpartydown.png" />
+	<icon name="awardxpdown" file="graphics/buttons/awardxpdown.png" />
+	<icon name="shareall" file="graphics/buttons/shareJH.png" />
+	<icon name="sharealldown" file="graphics/buttons/shareJHdown.png" />
 
-	<!-- Extension additions END -->
 </root>

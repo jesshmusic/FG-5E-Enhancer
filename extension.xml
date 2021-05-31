@@ -51,7 +51,6 @@
 
 		<!-- Encounter Window -->
 		<includefile source="JH/tools_JH.xml"/>
-		<includefile source="JH/graphics_JH.xml"/>
 		<includefile source="JH/strings_JH.xml"/>
 
 		<!-- Adds menu items for the extension -->
