@@ -64,6 +64,12 @@ function onRestoreAllWindows()
 				windowCount = windowCount + 1;
 			end
 		end
+
+		local message = "[WSX] Restored "..windowCount.." previous window";
+		if windowCount ~= 1 then
+			message = message.."s";
+		end
+		Comm.addChatMessage({text=message});
 	end
 end
 
@@ -124,6 +130,7 @@ end
 function openWindow(windowData)
 	windowData.path = windowData.path or "";
 	local window = Interface.openWindow(windowData.class, windowData.path);
+	Debug.chat(window);
 	if window then
 		window.setSize(windowData.width, windowData.height);
 		window.setPosition(windowData.xPos, windowData.yPos);
@@ -142,6 +149,13 @@ function handleSave(nameText)
 			windowCount = windowCount + 1;
 		end
 	end
+
+	local message = "[WSX] Saved "..windowCount.." window";
+	if windowCount ~= 1 then
+		message = message.."s";
+	end
+	message = message.." to '"..nameText.."'";
+	Comm.addChatMessage({text=message});
 end
 
 function saveWindow(windowData)

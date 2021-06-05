@@ -14,7 +14,6 @@ end
 -- ---------------------------------------------------------------
 function sendEvent(data, recipient)
 	data.username = User.getUsername();
-	
 	if User.isHost() and data.recipient == data.username then
 		-- Host does not receive its own delivered OOB messages, handle manually
 		OOBManager.processOOBMessage(data);

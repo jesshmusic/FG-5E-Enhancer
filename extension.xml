@@ -3,13 +3,13 @@
 <root version="3.1.4" release="1">
 
 	<properties>
-		<name>JessHMusic Custom Enhancements for 5E 3.1.4</name>
-		<version>3.1.4</version>
+		<name>Zagyg's Custom Enhancements for 5E</name>
+		<version>4.0.0</version>
 		<description>
-			<text>JessHMusic Custom Enhancements for 5E</text>
+			<text>Zagyg's Custom Enhancements for 5E</text>
 			<author>Jess Hendricks</author>
 		</description>
-		<loadorder>78</loadorder>
+		<loadorder>999</loadorder>
 		<ruleset>
 			<name>5E</name>
 		</ruleset>
@@ -68,11 +68,6 @@
     <script name="ConnectionManagerADND" file="scripts/manager_connection_adnd.lua" />
 
     <includefile source="utility/utility_readycheck.xml" />
-
-		<!-- Window Save -->
-		<script name="WindowSaveHost" file="scripts/window_save_host.lua" />
-		<script name="WindowSaveCore" file="scripts/window_save_core.lua" />
-		<script name="WindowSaveUtility" file="scripts/window_save_utility.lua" />
 		<!-- Presented in alphabetic order of the .lua file in the /scripts folder -->
 
 		<!-- actor_condition.lua: widgets to appear on top of tokens to reflect their condition -->
@@ -106,6 +101,11 @@
 
 		<!-- blood_pool.lua: on actor death, controls blood splatter placed under the token as another token -->
 		<script name="BloodPool" file="scripts/blood_pool.lua" />
+
+		<!-- Window Save -->
+		<script name="WindowSaveHost" file="scripts/window_save_host.lua" />
+		<script name="WindowSaveCore" file="scripts/window_save_core.lua" />
+		<script name="WindowSaveUtility" file="scripts/window_save_utility.lua" />
 	</base>
 
 	<announcement text="JessHMusic Custom Enhancements for 5E 3.1.4" font="emotefont" icon="ce_icon" />
