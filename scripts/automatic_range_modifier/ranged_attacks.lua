@@ -537,7 +537,10 @@ function getWeaponRanges5e(rActor, sRanged, sWeaponName)
 
         if (nodeName:lower() == sWeaponName:lower()) then
           local description = DB.getText(nodeChild .. '.range');
-          local rangeText = string.match(description, "%d*");
+          local rangeText = '120';
+          if description then
+            rangeText = string.match(description, "%d*");
+          end
           medRange = rangeText;
           maxRange = medRange;
         end
