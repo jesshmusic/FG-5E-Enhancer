@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<!-- 
-  Please see the license.html file included with this distribution for 
+<!--
+  Please see the license.html file included with this distribution for
   attribution and copyright information.
 -->
 
@@ -68,7 +68,7 @@
 
 			<resize_charsheethelper />
 			<close_charsheethelper />
-      
+
     </sheetdata>
   </windowclass>
 
@@ -78,7 +78,7 @@
       function onInit()
         updateVisual();
       end
-      
+
       function updateVisual()
         if User.isHost() then
           list.setVisible(true);
@@ -96,7 +96,7 @@
         <datasource>connectedlist</datasource>
         <class>ready_check_entry</class>
       </ready_check_list>
-      
+
       <!-- User visible -->
       <subwindow name="main_user">
         <anchored>
@@ -106,10 +106,10 @@
         </anchored>
         <class>ready_check_entry_user</class>
       </subwindow>
-      
+
     </sheetdata>
   </windowclass>
-  
+
   <windowclass name="ready_check_entry">
 		<margins control="0,0,0,5" />
     <script file="utility/scripts/readycheck_host.lua" />
@@ -120,7 +120,7 @@
           <left anchor="center" offset="-35" />
         </anchored>
       </portrait_readycheck>
-      
+
 			<label name="name_label">
         <anchored to="readycheck_portrait">
           <top anchor="bottom" />
@@ -129,7 +129,7 @@
         </anchored>
         <font>reference-b-large</font>
 			</label>
- 
+
       <buttoncontrol name="ready_check_select">
         <anchored to="readycheck_portrait" position="left" offset="2,0" width="50"/>
         <tooltip text="ARE THEY READY???" />
@@ -141,10 +141,10 @@
         <state icon="chat_success" pressed="chat_success" />
         <invisible />
       </buttoncontrol>
-      
+
     </sheetdata>
   </windowclass>
-  
+
   <windowclass name="ready_check_entry_user">
 		<margins control="0,0,0,5" />
     <script file="utility/scripts/readycheck_user.lua" />
@@ -182,10 +182,10 @@
         <state textres="readycheck_button_label" />
         <tooltip textres="readycheck_button_label_tooltip" />
       </button_text_sm>
-      
+
     </sheetdata>
   </windowclass>
-  
+
   <!-- template for user connected list for Host -->
   <template name="ready_check_list">
     <windowlist name="list">
@@ -200,8 +200,8 @@
       <noscroll />
     </windowlist>
   </template>
-  
-	<template name="anchor_title_charsheet">
+
+	<template name="anchor_title_charsheet" merge="join">
 		<genericcontrol>
 			<anchored height="0">
 				<top offset="35" />
@@ -211,8 +211,8 @@
 			<disabled />
 		</genericcontrol>
 	</template>
-  
-	<template name="close_charsheethelper">
+
+	<template name="close_charsheethelper" merge="join">
 		<close>
 			<anchored>
 				<top offset="24" />
@@ -221,7 +221,7 @@
 		</close>
 	</template>
 
-	<template name="resize_charsheethelper">
+	<template name="resize_charsheethelper" merge="join">
 		<resize>
 			<anchored>
 				<right offset="-12" />
@@ -235,5 +235,5 @@
       <disabled />
     </genericcontrol>
   </template>
-  
+
   </root>

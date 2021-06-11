@@ -101,11 +101,6 @@
 
 		<!-- blood_pool.lua: on actor death, controls blood splatter placed under the token as another token -->
 		<script name="BloodPool" file="scripts/blood_pool.lua" />
-
-		<!-- Window Save -->
-		<script name="WindowSaveHost" file="scripts/window_save_host.lua" />
-		<script name="WindowSaveCore" file="scripts/window_save_core.lua" />
-		<script name="WindowSaveUtility" file="scripts/window_save_utility.lua" />
 	</base>
 
 	<announcement text="JessHMusic Custom Enhancements for 5E 3.1.4" font="emotefont" icon="ce_icon" />
